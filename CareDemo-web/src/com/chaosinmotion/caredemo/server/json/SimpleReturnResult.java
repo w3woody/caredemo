@@ -63,6 +63,17 @@ public class SimpleReturnResult extends ReturnResult
 	}
 	
 	/**
+	 * Create a simple return result with a single key/value pair.
+	 * @param key
+	 * @param value
+	 */
+	public SimpleReturnResult(String key, boolean value)
+	{
+		this();
+		put(key,value);
+	}
+	
+	/**
 	 * Add a string return value by key.
 	 * @param key
 	 * @param value

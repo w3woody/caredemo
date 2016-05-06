@@ -19,11 +19,9 @@
 
 package com.chaosinmotion.caredemo.server.json;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import com.chaosinmotion.caredemo.shared.Errors;
 
 /**
  * Base class used to formulate a return result from the SecureChat server.
@@ -63,66 +61,6 @@ public class ReturnResult
 		errorCode = error;
 		errorMessage = message;
 		exception = null;
-	}
-	
-	/**
-	 * Generate an error result. This is used to aid in debugging on the
-	 * client side. This also initializes an array to help diagnose the 
-	 * problem client-side.
-	 * 
-	 * Normally this should never be called.
-	 * 
-	 * @param exception
-	 */
-	public ReturnResult(Throwable th)
-	{
-		success = false;
-		errorCode = Errors.ERROR_EXCEPTION;
-		errorMessage = "Internal exception: " + th.getMessage();
-				
-		exception = new ArrayList<String>();
-		boolean cflag = false;
-		do {
-			if (cflag) {
-				exception.add("Caused by " + th.getMessage());
-			} else {
-				cflag = true;
-			}
-			
-			StackTraceElement[] e = th.getStackTrace();
-			int maxlen = e.length;
-			th = th.getCause();
-			if (th != null) {
-				// If there is a cause, we trim the items we show for this
-				// exception by removing the tail of the stack trace that
-				// is in common. This helps with reading the stack frame.
-				StackTraceElement[] n = th.getStackTrace();
-				int nlen = n.length;
-				while ((maxlen > 0) && (nlen > 0)) {
-					StackTraceElement el = e[maxlen-1];
-					StackTraceElement nl = n[nlen-1];
-					if (el.equals(nl)) {
-						--maxlen;
-						--nlen;
-					} else {
-						break;
-					}
-				}
-				
-				// Make sure we show at least one item, unless we don't have
-				// a stack frame (which can happen sometimes)
-				if (maxlen == 0) {
-					maxlen++;
-					if (maxlen > e.length) maxlen = e.length;
-				}
-			}
-			
-			// Now add the stack frame
-			for (int i = 0; i < maxlen; ++i) {
-				exception.add("  " + e[i].toString());
-			}
-			
-		} while (th != null);
 	}
 	
 	/**

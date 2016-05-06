@@ -14,8 +14,7 @@ public class MessageBox extends DialogBox
 {
 	public interface Callback
 	{
-		void clickedOK();
-		void clickedCancel();
+		void finished();
 	}
 	
 	public MessageBox(String title, String message)
@@ -42,39 +41,18 @@ public class MessageBox extends DialogBox
 		vpanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		vpanel.add(hpanel);
 		
-		if (callback != null) {
-			BarButton cancel = new BarButton("Cancel");
-			cancel.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event)
-				{
-					callback.clickedCancel();
-					hide();
+		BarButton done = new BarButton("Done");
+		done.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event)
+			{
+				if (callback != null) {
+					callback.finished();
 				}
-			});
-			hpanel.add(cancel);
-
-			BarButton ok = new BarButton("OK");
-			ok.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event)
-				{
-					callback.clickedOK();
-					hide();
-				}
-			});
-			hpanel.add(ok);
-		} else {
-			BarButton done = new BarButton("Done");
-			done.addClickHandler(new ClickHandler() {
-				@Override
-				public void onClick(ClickEvent event)
-				{
-					hide();
-				}
-			});
-			hpanel.add(done);
-		}
+				hide();
+			}
+		});
+		hpanel.add(done);
 		
 		setWidget(vpanel);
 		

@@ -28,7 +28,8 @@ package com.chaosinmotion.caredemo.shared;
 public interface Errors
 {
 	/**
-	 * Unknown request sent to back end
+	 * Unknown request sent to back end. This indicates that JSON was sent
+	 * that was not either a secret key negotiation or an encrypted command
 	 */
 	public int UNKNOWNREQUEST = 1;
 	
@@ -50,16 +51,44 @@ public interface Errors
 	 * may be because the encryption token was wrong.
 	 */
 	public int JSONERROR = 4;
-
-	/**
-	 * Encrypted result; indicates command in the request was unknown.
-	 */
-	public int UNKNOWNCOMMAND = 5;
-
+	
 	/**
 	 * Internal server-side exception
 	 */
-	public int ERROR_EXCEPTION = 10;
+	public int EXCEPTION = 5;
+	
+	
+	/*
+	 * The following errors are sent within an encrypted wrapper
+	 */
+	
+	/**
+	 * User not logged in; unable to complete command
+	 */
+	public int NOTLOGGEDIN = 10;
 
-	public int SERVEREXCEPTION = 11;
+	/**
+	 * Required parameter missing
+	 */
+	public int MISSINGPARAM = 11;
+
+	/**
+	 * login: wrong credentials
+	 */
+	public int INCORRECTCREDENTIALS = 12;
+	
+	/**
+	 * Mobile connection action has expired.
+	 */
+	public int MOBILEEXPIREDCONNECT = 13;
+	
+	/**
+	 * Returned by connect if the key entered by the user is wrong.
+	 */
+	public int INCORRECTMOBILEKEY = 14;
+
+	/**
+	 * Password supplied while updating passwords was wrong.
+	 */
+	public int WRONGPASSWORD = 15;
 }

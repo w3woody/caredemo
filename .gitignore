@@ -1,3 +1,5 @@
 .DS_Store
 CareDemo-web/gwt-unitCache
 CareDemo-web/war/caredemo
+CareDemo-web/war/forgot
+CareDemo-web/war/home

@@ -5,7 +5,6 @@
 package com.chaosinmotion.caredemo.server;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -18,6 +17,9 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import com.chaosinmotion.caredemo.server.commands.Users;
+import com.chaosinmotion.caredemo.server.json.OuterResult;
+import com.chaosinmotion.caredemo.server.json.ReturnResult;
 import com.chaosinmotion.caredemo.shared.Base64;
 import com.chaosinmotion.caredemo.shared.Blowfish;
 import com.chaosinmotion.caredemo.shared.DiffieHellman;
@@ -50,7 +52,12 @@ public class SecureServlet extends HttpServlet
 			throws ServletException, IOException
 	{
 		HttpSession session = req.getSession();
-
+		OuterResult returnResult;
+		
+		/*
+		 * Get server link. This is used in a few places.
+		 */
+		
 		try {
 			/*
 			 * Extract the JSON request.
@@ -70,12 +77,8 @@ public class SecureServlet extends HttpServlet
 					/*
 					 * Blowfish key not present; our token may have expired.
 					 */
-					JSONObject retResult = new JSONObject();
-					retResult.put("error", "Token Expired");
-					retResult.put("errcode", Errors.TOKENEXPIRED);
-					ServletOutputStream stream = resp.getOutputStream();
-					resp.setContentType("application/json");
-					stream.print(retResult.toString());
+					returnResult = new OuterResult(Errors.TOKENEXPIRED,"Token expired");
+
 				} else {
 					
 					/*
@@ -92,12 +95,7 @@ public class SecureServlet extends HttpServlet
 					 */
 					
 					if (requestParams.has("cmd")) {
-						JSONObject retResult = new JSONObject();
-						retResult.put("error", "Command Error");
-						retResult.put("errcode", Errors.CMDERROR);
-						ServletOutputStream stream = resp.getOutputStream();
-						resp.setContentType("application/json");
-						stream.print(retResult.toString());
+						returnResult = new OuterResult(Errors.CMDERROR,"Command Error");
 					} else {
 						String cmd = request.optString("cmd");
 
@@ -105,19 +103,8 @@ public class SecureServlet extends HttpServlet
 						 * We have a result. Encrypt using our blowfish key
 						 * and send the Base64 data
 						 */
-						JSONObject result = doRequest(cmd,request,session);
-						String resStr = result.toString();
-						byte[] encoded = enc.encrypt(resStr);
-						String encodedBase64 = Base64.encode(encoded);
-						
-						/*
-						 * Encode the result
-						 */
-						JSONObject retVal = new JSONObject();
-						retVal.put("response", encodedBase64);
-						ServletOutputStream stream = resp.getOutputStream();
-						resp.setContentType("application/json");
-						stream.print(retVal.toString());
+						ReturnResult result = doRequest(req,cmd,request,session);
+						returnResult = new OuterResult(result,enc);
 					}
 				}
 			} else if (requestParams.has("pubkey")) {
@@ -143,42 +130,33 @@ public class SecureServlet extends HttpServlet
 				
 				// Return our own private key so the client can also generate the
 				// secret key
-				JSONObject retResult = new JSONObject();
-				retResult.put("pubkey", dh.getPublicKey().toString());
-				ServletOutputStream stream = resp.getOutputStream();
-				resp.setContentType("application/json");
-				stream.print(retResult.toString());
+				returnResult = new OuterResult(dh.getPublicKey().toString());
+
 			} else {
 				/*
 				 * Unknown request. Produce result
 				 */
 				
-				JSONObject retResult = new JSONObject();
-				retResult.put("error", "Unknown Request");
-				retResult.put("errcode", Errors.UNKNOWNREQUEST);
-				ServletOutputStream stream = resp.getOutputStream();
-				resp.setContentType("application/json");
-				stream.print(retResult.toString());
+				returnResult = new OuterResult(Errors.UNKNOWNREQUEST,"Unknown Request Wrapper");
 			}
 		}
 		catch (JSONException exception)
 		{
-			JSONObject retResult = new JSONObject();
-			retResult.put("error", "JSON Error");
-			retResult.put("errcode", Errors.JSONERROR);
-			ServletOutputStream stream = resp.getOutputStream();
-			resp.setContentType("application/json");
-			stream.print(retResult.toString());
+			returnResult = new OuterResult(Errors.JSONERROR,"JSON Error");
 		}
 		catch (Exception exception)
 		{
-			JSONObject retResult = new JSONObject();
-			retResult.put("error", "JSON Error");
-			retResult.put("errcode", Errors.SERVEREXCEPTION);
-			ServletOutputStream stream = resp.getOutputStream();
-			resp.setContentType("application/json");
-			stream.print(retResult.toString());
+			System.out.println("Exception:");
+			exception.printStackTrace(System.out);
+			returnResult = new OuterResult(Errors.EXCEPTION,"Server Exception");
 		}
+		
+		/*
+		 * Send the result
+		 */
+		ServletOutputStream stream = resp.getOutputStream();
+		resp.setContentType("application/json");
+		stream.print(returnResult.toString());
 	} 
 
 	/**
@@ -188,7 +166,8 @@ public class SecureServlet extends HttpServlet
 	 * @param session 
 	 * @return
 	 */
-	private JSONObject doRequest(String cmd, JSONObject request, HttpSession session) throws Exception
+	private ReturnResult doRequest(HttpServletRequest httpRequest, String cmd, 
+			JSONObject request, HttpSession session) throws Exception
 	{
 		int index = cmd.indexOf('/');
 		String groupName = cmd.substring(0, index);
@@ -208,6 +187,20 @@ public class SecureServlet extends HttpServlet
 				Class<?> c = Class.forName(className);
 				proxy = c.newInstance();
 				interfaces.put(className, proxy);
+				
+				// special case: if user object, populate server URL
+				if (groupName.equalsIgnoreCase("users")) {
+					String scheme = httpRequest.getScheme();
+					String server = httpRequest.getServerName();
+					int port = httpRequest.getServerPort();
+					if (port == 80) {
+						server = scheme + "://" + server;
+					} else {
+						server = scheme + "://" + server + ":" + port;
+					}
+
+					((Users)proxy).setServer(server);
+				}
 			}
 		}
 		
@@ -218,7 +211,7 @@ public class SecureServlet extends HttpServlet
 		Class<?> c = proxy.getClass();
 		Method m = c.getMethod(methodName, String.class, JSONObject.class, HttpSession.class);
 		
-		JSONObject ret = (JSONObject)m.invoke(proxy, cmd, request, session);
+		ReturnResult ret = (ReturnResult)m.invoke(proxy, cmd, request, session);
 		
 		return ret;
 	};

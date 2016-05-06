@@ -124,3 +124,25 @@ body {
 	font-size: 14px;
 	font-family: Helvetica, Verdana, Arial, sans-serif;
 }
+
+.content {
+	width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+}
+
+p {
+	line-height: 20px;
+	color: #6c6c6c;
+	font-size: 14px;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+
+h1 {
+	font-weight: bold;
+	color: #4e7bb1;
+	font-size: 22px;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+

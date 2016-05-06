@@ -21,6 +21,7 @@ import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.storage.client.Storage;
+import com.google.gwt.user.client.Window;
 
 /**
  * Entry point for our network requests. (TODO: add broadcast mechanism to
@@ -32,8 +33,12 @@ public class Network
 {
 	private static String getURL()
 	{
-		String path = GWT.getModuleBaseURL() + "api";
-		return path;
+		// We run across multiple modules, but we want the same endpoint
+		String path = GWT.getModuleBaseURL();
+		path = path.substring(0, path.length()-1);
+		String module = GWT.getModuleName();
+		path = path.substring(0, path.length() - module.length());
+		return path + "caredemo/api";
 	}
 	
 	/**
@@ -43,7 +48,6 @@ public class Network
 	{
 		void response(JSONObject result);
 		void error(int serverError);
-		void exception();
 	}
 	
 	public interface SecureCallback
@@ -111,7 +115,8 @@ public class Network
 				@Override
 				public void exception()
 				{
-					cb.exception();
+					// Something went haywire.
+					cb.error(Errors.EXCEPTION);
 				}
 			});
 		} else {
@@ -156,6 +161,17 @@ public class Network
 							request(req,cb);
 						} else {
 							/*
+							 * Display error message. The remaining errors
+							 * that can arrive in this channel represent a
+							 * developer error and should normally not
+							 * happen.
+							 */
+							
+							new MessageBox("Internal Error","An internal error "
+									+ "was caught while connecting to the back "
+									+ "end: error " + errCode);
+							
+							/*
 							 * These errors are simply passed up
 							 */
 							
@@ -165,21 +181,46 @@ public class Network
 					}
 					
 					/*
-					 * Encode the response.
+					 * Decode the response.
 					 */
+					
 					String respStr = obj.get("response").isString().stringValue();
 					byte[] respEncode = Base64.decode(respStr);
 					String reponseStr = encryption.decrypt(respEncode);
 					JSONObject responseData = JSONParser.parseLenient(reponseStr).isObject();
 					
-					cb.response(responseData);
+					/*
+					 * We catch one of the exceptions: not logged in. If the
+					 * user is not logged in, we bounce the page to the
+					 * index page. Otherwise, we simply pass the error up.
+					 * Note that this means the only callers to response are
+					 * those which were successful.
+					 */
+					
+					if (responseData.get("success").isBoolean().booleanValue() == false) {
+						int errCode = (int)(responseData.get("error").isNumber().doubleValue());
+						if (errCode == Errors.NOTLOGGEDIN) {
+							new MessageBox("Session expired","Your session has expired, and for your security you have been logged out.",new MessageBox.Callback() {
+								@Override
+								public void finished()
+								{
+									Window.Location.replace("index.html");
+								}
+							});
+							return;
+						} else {
+							cb.error(errCode);
+						}
+					} else {
+						cb.response(responseData);
+					}
 				}
 
 				@Override
 				public void onError(Request request, Throwable exception)
 				{
 					doError(exception);
-					cb.exception();
+					cb.error(Errors.EXCEPTION);
 				}
 			});
 

@@ -5,7 +5,6 @@
 package com.chaosinmotion.caredemo.client.dialogs;
 
 import com.chaosinmotion.caredemo.client.network.Network;
-import com.chaosinmotion.caredemo.client.util.UserInfo;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
 import com.chaosinmotion.caredemo.shared.Constants;
 import com.chaosinmotion.caredemo.shared.SHA256Hash;
@@ -32,7 +31,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author woody
  *
  */
-public class LoginDialog extends DialogBox
+public class ResetPassword extends DialogBox
 {
 	public interface Callback
 	{
@@ -40,19 +39,21 @@ public class LoginDialog extends DialogBox
 		void failure();
 	}
 	
+	private String token;
+	
 	private Callback callback;
 	private FlexTable table;
 	private BarButton doneButton;
 	
-	private boolean forgotFlag;
-	private TextBox username;
-	private PasswordTextBox password;
+	private PasswordTextBox password1;
+	private PasswordTextBox password2;
 	
-	public LoginDialog(Callback cb)
+	public ResetPassword(String t, Callback cb)
 	{
 		super(false,true);
 		
 		callback = cb;
+		token = t;
 		
 		setStyleName("messageBox");
 		setGlassEnabled(true);
@@ -74,6 +75,20 @@ public class LoginDialog extends DialogBox
 		table.setCellPadding(0);
 		table.setBorderWidth(0);
 		table.getColumnFormatter().setWidth(0, "120px");
+
+		table.setText(0, 0, "Password:");
+		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
+		
+		password1 = new PasswordTextBox();
+		password1.setStyleName("dialogtextbox");
+		table.setWidget(0, 1, password1);
+
+		table.setText(1, 0, "Retype Password:");
+		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
+		
+		password2 = new PasswordTextBox();
+		password2.setStyleName("dialogtextbox");
+		table.setWidget(1, 1, password2);
 
 		/*
 		 *  Add buttons
@@ -108,12 +123,6 @@ public class LoginDialog extends DialogBox
 		setWidget(vpanel);
 		
 		/*
-		 * Populate table for login
-		 */
-		
-		populateLogin();
-		
-		/*
 		 * Show the panel
 		 */
 		
@@ -132,109 +141,32 @@ public class LoginDialog extends DialogBox
 		});
 	}
 	
-	private void insertForgetSelector(int row, final boolean select)
-	{
-		CheckBox cbox = new CheckBox("Forgot Password");
-		cbox.setValue(select);
-		cbox.setStyleName("dialogcheckbox");
-		table.setWidget(row, 1, cbox);
-		
-		cbox.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event)
-			{
-				if (select) {
-					populateLogin();
-				} else {
-					populateForgot();
-				}
-			}
-		});
-	}
-	
-	private void populateForgot()
-	{
-		forgotFlag = true;
-		
-		doneButton.setText("Forgot Password");
-		
-		table.removeAllRows();
-		
-		table.setText(0, 0, "E-Mail:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
-		
-		username = new TextBox();
-		username.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, username);
-		
-		insertForgetSelector(1, true);
-	}
-	
-	/**
-	 * Clear and repopulate the flex table with login dialog box
-	 */
-	private void populateLogin()
-	{
-		forgotFlag = false;
-		
-		doneButton.setText("Login");
-		
-		table.removeAllRows();
-		
-		table.setText(0, 0, "Username:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
-		
-		username = new TextBox();
-		username.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, username);
 
-		table.setText(1, 0, "Password:");
-		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
-		
-		password = new PasswordTextBox();
-		password.setStyleName("dialogtextbox");
-		table.setWidget(1, 1, password);
-
-		insertForgetSelector(2, false);
-	}
-	
 	/**
 	 * Handle the login process
 	 */
 	private void doDone()
 	{
-		if (forgotFlag) {
-			// TODO: network call to the forgot password mechanism
-			JSONObject req = new JSONObject();
-			req.put("cmd", new JSONString("users/forgotPassword"));
-			req.put("email", new JSONString(username.getText()));
-			
-			Network.get().request(req, new Network.ResultCallback() {
-				@Override
-				public void response(JSONObject result)
-				{
-					new MessageBox("E-mail sent","An e-mail has been sent with instructions on how to reset your password");
-				}
-								
-				@Override
-				public void error(int serverError)
-				{
-					new MessageBox("Error","Incorrect username/password pair. If you forgot your password, select \"Forgot Password\" to reset your password.");
-				}
-			});
+		String p1 = password1.getText();
+		String p2 = password2.getText();
+		if (!p1.equals(p2)) {
+			new MessageBox("Error","Passwords do not match");
+			return;
+		}
+		
+		String penc = SHA256Hash.hash(p1 + Constants.SALT);
+		
+		// Run login process
+		JSONObject req = new JSONObject();
+		req.put("cmd", new JSONString("users/forgotPassword"));
+		req.put("token", new JSONString(token));
+		req.put("password", new JSONString(penc));
 
-		} else {
-			// Run login process
-			JSONObject req = new JSONObject();
-			req.put("cmd", new JSONString("users/login"));
-			req.put("username", new JSONString(username.getText()));
-			String passwordHash = SHA256Hash.hash(password.getText() + Constants.SALT);
-			req.put("password", new JSONString(passwordHash));
-			
-			Network.get().request(req, new Network.ResultCallback() {
-				@Override
-				public void response(JSONObject result)
-				{
+		Network.get().request(req, new Network.ResultCallback() {
+			@Override
+			public void response(JSONObject result)
+			{
+				if (result.get("success").isBoolean().booleanValue()) {
 					/*
 					 * Stash away the login information in persistant store
 					 * and return success. If we dont' have persistant store
@@ -242,23 +174,23 @@ public class LoginDialog extends DialogBox
 					 * switch pages.
 					 */
 					
-					JSONObject userInfo = result.get("data").isObject();
 					Storage storage = Storage.getSessionStorageIfSupported();
 					if (storage != null) {
-						storage.setItem("user", userInfo.toString());
+						storage.setItem("user", result.toString());
 					}
-					UserInfo.get().setUserInfo(userInfo);
 					
 					callback.success();
 					hide();
-				}
-								
-				@Override
-				public void error(int serverError)
-				{
+				} else {
 					new MessageBox("Error","Incorrect username/password pair. If you forgot your password, select \"Forgot Password\" to reset your password.");
 				}
-			});
-		}
+			}
+			
+			@Override
+			public void error(int serverError)
+			{
+				new MessageBox("Error","An unknown network problem occurred.");
+			}
+		});
 	}
 }

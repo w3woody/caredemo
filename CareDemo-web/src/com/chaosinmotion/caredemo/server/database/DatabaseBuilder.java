@@ -96,12 +96,38 @@ public class DatabaseBuilder
                 	 *  If there are no users, we insert an administrator to
                 	 *  bootstrap our system
                 	 */
-                	ps = conn.prepareStatement("INSERT INTO Users ( username, email, name, password ) VALUES ( ?, ?, ?, ? )");
+                	ps = conn.prepareStatement("INSERT INTO Users "
+                			+ "( username, email, name, password ) "
+                			+ "VALUES "
+                			+ "( ?, ?, ?, ? ); SELECT currval('Users_userid_seq')");
                 	ps.setString(1, "admin");
                 	ps.setString(2, "");
                 	ps.setString(3, "Admin");
                 	ps.setString(4, SHA256Hash.hash("password" + Constants.SALT));
                 	
+                	ps.execute();
+                	
+                    int utc = ps.getUpdateCount();
+                    int index = 0;
+                    if ((utc == 1) && ps.getMoreResults()) {
+                        rs = ps.getResultSet();
+                        if (rs.next()) {
+                        	index = rs.getInt(1);
+                        }
+                        rs.close();
+                    }
+
+                    /*
+                	 * Now set the admin ACL
+                	 */
+                	
+                	ps.close();
+                	ps = conn.prepareStatement("INSERT INTO UserAccessControlList " +
+                			"    ( userid, ace ) " +
+                			"VALUES " +
+                			"    ( ?, ? )");
+                	ps.setInt(1, index);
+                	ps.setInt(2, 1);			// ACE for Administrator
                 	ps.execute();
                 }
             }
