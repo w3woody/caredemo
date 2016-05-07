@@ -25,13 +25,6 @@ import com.google.gwt.user.client.Window;
 public class UserInfo
 {
 	/**
-	 * Represents the information associated with a user.
-	 */
-	public static class Data
-	{
-	}
-	
-	/**
 	 * Callback for getting user data. Under some cases this can require a
 	 * call to the back end, so this is declared asynchronous.
 	 * @author woody
@@ -90,6 +83,18 @@ public class UserInfo
 				storage.removeItem("user");
 			}
 			Window.Location.replace("index.html");
+		}
+	}
+	
+	/**
+	 * Call this if the basic information is reloaded
+	 */
+	public void clearCache()
+	{
+		data = null;
+		Storage storage = Storage.getSessionStorageIfSupported();
+		if (storage != null) {
+			storage.removeItem("user");
 		}
 	}
 	

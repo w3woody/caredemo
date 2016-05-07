@@ -91,4 +91,9 @@ public interface Errors
 	 * Password supplied while updating passwords was wrong.
 	 */
 	public int WRONGPASSWORD = 15;
+
+	/**
+	 * Access violation; user does not have permission to do this operation.
+	 */
+	public int ACCESSVIOLATION = 16;
 }

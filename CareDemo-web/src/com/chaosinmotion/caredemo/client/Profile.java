@@ -6,17 +6,17 @@ package com.chaosinmotion.caredemo.client;
 
 import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.network.Network;
-import com.chaosinmotion.caredemo.client.panels.MobileDevicePanel;
-import com.chaosinmotion.caredemo.client.panels.PatientPanel;
+import com.chaosinmotion.caredemo.client.panels.ResetPasswordPanel;
+import com.chaosinmotion.caredemo.client.panels.UserAddressPanel;
+import com.chaosinmotion.caredemo.client.panels.UserInfoPanel;
+import com.chaosinmotion.caredemo.client.panels.UserPhonePanel;
 import com.chaosinmotion.caredemo.client.util.UserInfo;
 import com.chaosinmotion.caredemo.client.util.UserInfoData;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.HeadingElement;
-import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.Window;
@@ -27,8 +27,11 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @author woody
  *
  */
-public class HomePage implements EntryPoint
+public class Profile implements EntryPoint
 {
+	private UserAddressPanel uapanel;
+	private UserPhonePanel uppanel;
+	
 	@Override
 	public void onModuleLoad()
 	{
@@ -40,15 +43,6 @@ public class HomePage implements EntryPoint
 				loadContents(userData);
 			}
 		});
-		
-		/*
-		 * Determine based on the user info which modules we can show.
-		 * The patient module shows summary information for the user and
-		 * a welcome message. Admin modules and Health Care professional
-		 * modules provide links to separate pages.
-		 */
-		
-		
 	}
 	
 	/**
@@ -59,22 +53,79 @@ public class HomePage implements EntryPoint
 	{
 		RootPanel panel = RootPanel.get("contentpanel");
 
-		// TODO: Load the contents appropriate for the user.
-		PatientPanel ppanel = new PatientPanel();
+		/*
+		 * Load basic info panel
+		 */
+		UserInfoPanel ppanel = new UserInfoPanel();
 		ppanel.setWidth("100%");
 		panel.add(ppanel);
 		
-//		HeadingElement h = Document.get().createHElement(1);
-//		h.setInnerText("Mobile Devices");
-//		panel.getElement().appendChild(h);
-		ParagraphElement p = Document.get().createPElement();
-		p.setInnerHTML("The following devices have been registered to your " + 
-				"account for providing health care information");
-		panel.getElement().appendChild(p);
+		/*
+		 * Address panel
+		 */
 		
-		MobileDevicePanel cpanel = new MobileDevicePanel();
-		cpanel.setWidth("100%");
-		panel.add(cpanel);
+		uapanel = new UserAddressPanel(new UserAddressPanel.Callback() {
+			@Override
+			public void refresh()
+			{
+				reloadContents();
+			}
+		});
+		uapanel.setWidth("100%");
+		panel.add(uapanel);
+		
+		/*
+		 * Phone number panel
+		 */
+		
+		uppanel = new UserPhonePanel(new UserPhonePanel.Callback() {
+			@Override
+			public void refresh()
+			{
+				reloadContents();
+			}
+		});
+		uppanel.setWidth("100%");
+		panel.add(uppanel);
+		
+		/*
+		 * Password panel
+		 */
+		
+		ResetPasswordPanel rpanel = new ResetPasswordPanel();
+		rpanel.setWidth("100%");
+		panel.add(rpanel);
+		
+		/*
+		 * Trigger request to load contents
+		 */
+		
+		reloadContents();
+	}
+	
+	private void reloadContents()
+	{
+		JSONObject req = new JSONObject();
+		req.put("cmd", new JSONString("profile/getFullProfile"));
+		Network.get().request(req, new Network.ResultCallback() {
+			@Override
+			public void response(JSONObject result)
+			{
+				JSONObject data = result.get("data").isObject();
+				
+				JSONArray array = data.get("addresses").isArray();
+				uapanel.initialize(array);
+				
+				array = data.get("phones").isArray();
+				uppanel.initialize(array);
+			}
+			
+			@Override
+			public void error(int serverError)
+			{
+				new MessageBox("Network error","A problem occurred loading the contents");
+			}
+		});
 	}
 	
 	/**
@@ -89,16 +140,16 @@ public class HomePage implements EntryPoint
 		hpanel.setSpacing(0);
 		toolPanel.add(hpanel);
 		
-		BarButton profile = new BarButton("Welcome " + userData.name() + ": My Profile");
-		hpanel.add(profile);
-		profile.addClickHandler(new ClickHandler() {
+		BarButton home = new BarButton("Home");
+		hpanel.add(home);
+		home.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event)
 			{
-				doEditProfile();
+				Window.Location.assign("home.html");
 			}
 		});
-
+		
 		BarButton logout = new BarButton("Logout");
 		hpanel.add(logout);
 		logout.addClickHandler(new ClickHandler() {
@@ -108,14 +159,6 @@ public class HomePage implements EntryPoint
 				doLogout();
 			}
 		});
-	}
-	
-	/**
-	 * Edit the user's profile. 
-	 */
-	private void doEditProfile()
-	{
-		Window.Location.assign("profile.html");
 	}
 	
 	/**

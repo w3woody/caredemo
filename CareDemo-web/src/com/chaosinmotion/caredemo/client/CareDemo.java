@@ -45,7 +45,7 @@ public class CareDemo implements EntryPoint
 					@Override
 					public void success()
 					{
-						Window.Location.replace("home.html");
+						Window.Location.assign("home.html");
 					}
 					
 					@Override

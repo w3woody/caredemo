@@ -30,13 +30,13 @@ public class ForgotPassword implements EntryPoint
 			@Override
 			public void success()
 			{
-				Window.Location.replace("home.html");
+				Window.Location.assign("home.html");
 			}
 			
 			@Override
 			public void failure()
 			{
-				Window.Location.replace("index.html");
+				Window.Location.assign("index.html");
 			}
 		});
 	}

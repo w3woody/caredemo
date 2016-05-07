@@ -79,6 +79,8 @@ CREATE TABLE UserAddress (
 	postalcode text
 );
 
+CREATE INDEX UserAddressIX1 on UserAddress ( userid );
+
 #	UserPhone
 #
 #		User phone information. This is a phone number associated with the user
@@ -90,6 +92,8 @@ CREATE TABLE UserPhone (
 	name text,
 	phone text
 );
+
+CREATE INDEX UserPhoneIX1 on UserPhone ( userid );
 
 #-------------------------------------------------------------------------------#
 #																				#
