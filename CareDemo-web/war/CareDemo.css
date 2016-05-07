@@ -27,6 +27,12 @@ body {
 	font-family: Helvetica, sans-serif;
 }
 
+.gwt-Label {
+	font-size: 12px;
+	color: #808080;
+	font-family: Helvetica, sans-serif;
+}
+
 .messageBox {
 	border-left-width: 1px;
 	border-bottom-width: 2px;
@@ -109,6 +115,13 @@ body {
 	font-size: 14px;
 }
 
+.dialogtext {
+	color: #6c6c6c;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	font-size: 14px;
+	padding-bottom: 12px;
+}
+
 .dialogtextbox {
 	padding: 4px;
 	width: 95%;
@@ -146,3 +159,31 @@ h1 {
 	font-family: Helvetica, Verdana, Arial, sans-serif;
 }
 
+.contentPanel {
+	border-color: #608fbf;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.contentPanelTitle {
+	padding-right: 2px;
+	padding-left: 2px;
+	background-color: #608fbf;
+	padding-bottom: 3px;
+	padding-top: 3px;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	font-size: 14px;
+	color: white;
+}
+
+.contentPanelErrorText {
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	font-size: 12px;
+	color: red;
+}
+
+.contentPanelText {
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	font-size: 12px;
+	color: #808080;
+}

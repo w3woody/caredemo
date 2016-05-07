@@ -6,19 +6,16 @@ package com.chaosinmotion.caredemo.client.dialogs;
 
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
-import com.chaosinmotion.caredemo.shared.Constants;
-import com.chaosinmotion.caredemo.shared.SHA256Hash;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -29,33 +26,29 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author woody
  *
  */
-public class ResetPassword extends DialogBox
+public class AddMobileDeviceDialog extends DialogBox
 {
 	public interface Callback
 	{
 		void success();
 		void failure();
 	}
-	
-	private String token;
-	
+		
 	private Callback callback;
 	private FlexTable table;
 	private BarButton doneButton;
 	
-	private PasswordTextBox password1;
-	private PasswordTextBox password2;
+	private TextBox code;
 	
-	public ResetPassword(String t, Callback cb)
+	public AddMobileDeviceDialog(Callback cb)
 	{
 		super(false,true);
 		
 		callback = cb;
-		token = t;
 		
 		setStyleName("messageBox");
 		setGlassEnabled(true);
-		setText("Reset Password");
+		setText("Add Mobile Device");
 		
 		VerticalPanel vpanel = new VerticalPanel();
 		vpanel.setWidth("400px");
@@ -73,20 +66,18 @@ public class ResetPassword extends DialogBox
 		table.setCellPadding(0);
 		table.setBorderWidth(0);
 		table.getColumnFormatter().setWidth(0, "120px");
-
-		table.setText(0, 0, "Password:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
 		
-		password1 = new PasswordTextBox();
-		password1.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, password1);
+		table.setText(0, 0, "Make sure the CareDemo application is running on " + 
+				"your phone. Please enter the 8 character registration code shown there.");
+		table.getFlexCellFormatter().setColSpan(0, 0, 2);
+		table.getCellFormatter().setStyleName(0, 0, "dialogtext");
 
-		table.setText(1, 0, "Retype Password:");
+		table.setText(1, 0, "Code:");
 		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
 		
-		password2 = new PasswordTextBox();
-		password2.setStyleName("dialogtextbox");
-		table.setWidget(1, 1, password2);
+		code = new TextBox();
+		code.setStyleName("dialogtextbox");
+		table.setWidget(1, 1, code);
 
 		/*
 		 *  Add buttons
@@ -108,7 +99,7 @@ public class ResetPassword extends DialogBox
 		});
 		hpanel.add(cancel);
 		
-		doneButton = new BarButton("Reset");
+		doneButton = new BarButton("Add");
 		doneButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event)
@@ -145,45 +136,30 @@ public class ResetPassword extends DialogBox
 	 */
 	private void doDone()
 	{
-		String p1 = password1.getText();
-		String p2 = password2.getText();
-		if (!p1.equals(p2)) {
-			new MessageBox("Error","Passwords do not match");
-			return;
-		}
-		
-		String penc = SHA256Hash.hash(p1 + Constants.SALT);
-		
 		// Run login process
 		JSONObject req = new JSONObject();
-		req.put("cmd", new JSONString("users/forgotPassword"));
-		req.put("token", new JSONString(token));
-		req.put("password", new JSONString(penc));
+		req.put("cmd", new JSONString("mobile/connect"));
+		req.put("key", new JSONString(code.getText()));
 
 		Network.get().request(req, new Network.ResultCallback() {
 			@Override
 			public void response(JSONObject result)
 			{
-				/*
-				 * Stash away the login information in persistant store
-				 * and return success. If we dont' have persistant store
-				 * we wind up making a round trip to the server as we
-				 * switch pages.
-				 */
-				
-				Storage storage = Storage.getSessionStorageIfSupported();
-				if (storage != null) {
-					storage.setItem("user", result.toString());
-				}
-				
-				callback.success();
-				hide();
+				new MessageBox("Device Registered","This may take a few " + 
+						"moments to complete registration.",new MessageBox.Callback() {
+					@Override
+					public void finished()
+					{
+						callback.success();
+						hide();
+					}
+				});
 			}
 			
 			@Override
 			public void error(int serverError)
 			{
-				new MessageBox("Error","Incorrect username/password pair. If you forgot your password, select \"Forgot Password\" to reset your password.");
+				new MessageBox("Error","Incorrect registration code.");
 			}
 		});
 	}

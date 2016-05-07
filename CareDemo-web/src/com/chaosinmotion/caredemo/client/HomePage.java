@@ -6,10 +6,15 @@ package com.chaosinmotion.caredemo.client;
 
 import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.network.Network;
+import com.chaosinmotion.caredemo.client.panels.MobileDevicePanel;
+import com.chaosinmotion.caredemo.client.panels.PatientPanel;
 import com.chaosinmotion.caredemo.client.util.UserInfo;
 import com.chaosinmotion.caredemo.client.util.UserInfoData;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.HeadingElement;
+import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
@@ -32,8 +37,7 @@ public class HomePage implements EntryPoint
 			public void userData(UserInfoData userData)
 			{
 				loadToolbar(userData);
-				// TODO Auto-generated method stub
-				
+				loadContents(userData);
 			}
 		});
 		
@@ -47,6 +51,36 @@ public class HomePage implements EntryPoint
 		
 	}
 	
+	/**
+	 * Load contents
+	 * @param userData
+	 */
+	private void loadContents(UserInfoData userData)
+	{
+		RootPanel panel = RootPanel.get("contentpanel");
+
+		// TODO: Load the contents appropriate for the user.
+		PatientPanel ppanel = new PatientPanel();
+		ppanel.setWidth("100%");
+		panel.add(ppanel);
+		
+		HeadingElement h = Document.get().createHElement(1);
+		h.setInnerText("Mobile Devices");
+		panel.getElement().appendChild(h);
+		ParagraphElement p = Document.get().createPElement();
+		p.setInnerHTML("The following devices have been registered to your " + 
+				"account for providing health care information");
+		panel.getElement().appendChild(p);
+		
+		MobileDevicePanel cpanel = new MobileDevicePanel();
+		cpanel.setWidth("100%");
+		panel.add(cpanel);
+	}
+	
+	/**
+	 * Load the toolbar
+	 * @param userData
+	 */
 	private void loadToolbar(UserInfoData userData)
 	{
 		RootPanel toolPanel = RootPanel.get("toolspanel");
