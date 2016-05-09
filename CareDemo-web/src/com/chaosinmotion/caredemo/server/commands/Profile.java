@@ -9,12 +9,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import com.chaosinmotion.caredemo.server.database.Database;
 import com.chaosinmotion.caredemo.server.json.ReturnResult;
 import com.chaosinmotion.caredemo.server.json.SimpleReturnResult;
 import com.chaosinmotion.caredemo.server.json.UserProfileResult;
+import com.chaosinmotion.caredemo.server.json.UserReturnResult;
 import com.chaosinmotion.caredemo.server.util.UserRecord;
 import com.chaosinmotion.caredemo.shared.ACE;
 import com.chaosinmotion.caredemo.shared.Errors;
@@ -55,7 +57,83 @@ public class Profile
 			return userID;
 		}
 	}
+
+	/**
+	 * Get user basic info for a specific user.
+	 * @param cmd
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws IOException
+	 */
+	public ReturnResult getBasicInfo(String cmd, JSONObject request, HttpSession session) throws ClassNotFoundException, SQLException, IOException
+	{
+		/*
+		 * Standard preamble
+		 */
+		UserRecord u = (UserRecord)session.getAttribute("userid");
+		if (u == null) {
+			return new ReturnResult(Errors.NOTLOGGEDIN,"Not logged in");
+		}
+		int userID = getUserID(request,u);
+		if (userID == 0) {
+			return new ReturnResult(Errors.ACCESSVIOLATION,"Access violation");
+		}
+		
+
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+				
+		try {
+			c = Database.get();
+			ps = c.prepareStatement(
+					"SELECT email, name "
+							+ "FROM Users "
+							+ "WHERE userid = ?");
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+
+			UserReturnResult result;
+			if (rs.next()) {
+				String email = rs.getString(1);
+				String name = rs.getString(2);
+				
+				result = new UserReturnResult(u.getUserID(), email, name);
+				
+			} else {
+				return new ReturnResult(Errors.NOTLOGGEDIN,"User no longer exists");
+			}
+			
+			rs.close();
+			ps.close();
+			
+			/*
+			 * Get the ACL for this user from the database
+			 */
+			
+			ps = c.prepareStatement("SELECT ace FROM UserAccessControlList WHERE userid = ?");
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+			HashSet<Integer> acl = new HashSet<Integer>();
+			while (rs.next()) {
+				acl.add(rs.getInt(1));
+			}
+			
+			result.setACL(acl);
+
+			return result;			
+		}
+		finally {
+			if (c != null) c.close();
+			if (ps != null) ps.close();
+			if (rs != null) rs.close();
+		}
+	}
 	
+
 	public ReturnResult updateBasicInfo(String cmd, JSONObject request, HttpSession session) throws ClassNotFoundException, SQLException, IOException
 	{
 		/*

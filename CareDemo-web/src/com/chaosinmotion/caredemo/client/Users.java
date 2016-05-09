@@ -1,4 +1,4 @@
-/*	HomePage.java
+/*	Users.java
  * 
  *		CareDemo Copyright 2016 William Edward Woody, all rights reserved.
  */
@@ -6,17 +6,11 @@ package com.chaosinmotion.caredemo.client;
 
 import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.network.Network;
-import com.chaosinmotion.caredemo.client.panels.AdminCommandPanel;
-import com.chaosinmotion.caredemo.client.panels.HCPCommandPanel;
-import com.chaosinmotion.caredemo.client.panels.MobileDevicePanel;
-import com.chaosinmotion.caredemo.client.panels.PatientPanel;
+import com.chaosinmotion.caredemo.client.panels.UserPanel;
 import com.chaosinmotion.caredemo.client.util.UserInfo;
 import com.chaosinmotion.caredemo.client.util.UserInfoData;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
-import com.chaosinmotion.caredemo.shared.ACE;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
@@ -29,11 +23,16 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @author woody
  *
  */
-public class HomePage implements EntryPoint
+public class Users implements EntryPoint
 {
+	private UserPanel userPanel;
+
 	@Override
 	public void onModuleLoad()
 	{
+		/*
+		 * Get user info to figure out what we can load.
+		 */
 		UserInfo.get().getUserInfo(new UserInfo.Callback() {
 			@Override
 			public void userData(UserInfoData userData)
@@ -42,17 +41,8 @@ public class HomePage implements EntryPoint
 				loadContents(userData);
 			}
 		});
-		
-		/*
-		 * Determine based on the user info which modules we can show.
-		 * The patient module shows summary information for the user and
-		 * a welcome message. Admin modules and Health Care professional
-		 * modules provide links to separate pages.
-		 */
-		
-		
 	}
-	
+
 	/**
 	 * Load contents
 	 * @param userData
@@ -61,32 +51,17 @@ public class HomePage implements EntryPoint
 	{
 		RootPanel panel = RootPanel.get("contentpanel");
 
-		// TODO: Load the contents appropriate for the user.
-		PatientPanel ppanel = new PatientPanel();
-		ppanel.setWidth("100%");
-		panel.add(ppanel);
-		
-//		HeadingElement h = Document.get().createHElement(1);
-//		h.setInnerText("Mobile Devices");
-//		panel.getElement().appendChild(h);
-		ParagraphElement p = Document.get().createPElement();
-		p.setInnerHTML("The following devices have been registered to your " + 
-				"account for providing health care information");
-		panel.getElement().appendChild(p);
-		
-		MobileDevicePanel cpanel = new MobileDevicePanel();
-		cpanel.setWidth("100%");
-		panel.add(cpanel);
-		
-		if (userData.canAccess(ACE.Administrator)) {
-			AdminCommandPanel acp = new AdminCommandPanel();
-			acp.setWidth("100%");
-			panel.add(acp);
+		String p = Window.Location.getParameter("p");
+		if (p == null) {
+			// Missing parameter
+			Window.Location.replace("home.html");
+			return;
 		}
 		
-		HCPCommandPanel hcp = new HCPCommandPanel();
-		hcp.setWidth("100%");
-		panel.add(hcp);
+		userPanel = new UserPanel(p);
+		userPanel.setWidth("100%");
+		panel.add(userPanel);
+		// TODO: Load table
 	}
 	
 	/**
@@ -121,7 +96,6 @@ public class HomePage implements EntryPoint
 			}
 		});
 	}
-	
 	/**
 	 * Edit the user's profile. 
 	 */

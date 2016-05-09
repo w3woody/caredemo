@@ -96,4 +96,9 @@ public interface Errors
 	 * Access violation; user does not have permission to do this operation.
 	 */
 	public int ACCESSVIOLATION = 16;
+
+	/**
+	 * Incorrect parameters
+	 */
+	public int INCORRECTPARAMS = 17;
 }

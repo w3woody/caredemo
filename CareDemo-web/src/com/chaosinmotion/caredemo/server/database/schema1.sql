@@ -85,7 +85,7 @@ CREATE INDEX UserAddressIX1 on UserAddress ( userid );
 #
 #		User phone information. This is a phone number associated with the user
 
-CREATE TABLE UserPhone (
+CREATE TABLE useraccesscontrolddd (
 	phoneid serial not null primary key,
 	userid int not null,
 	

@@ -119,7 +119,7 @@ public class Users
 	}
 	
 	/**
-	 * Handle login request.
+	 * Handle user info.
 	 * @param cmd
 	 * @param request
 	 * @param session
