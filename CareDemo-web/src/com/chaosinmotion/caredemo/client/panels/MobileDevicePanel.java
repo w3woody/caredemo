@@ -26,8 +26,9 @@ public class MobileDevicePanel extends ContentPanel
 	public MobileDevicePanel()
 	{
 		super("Mobile Devices");
+		setContent(initWidget());
 	}
-	@Override
+
 	protected Widget initWidget()
 	{
 		table = new FlexTable();

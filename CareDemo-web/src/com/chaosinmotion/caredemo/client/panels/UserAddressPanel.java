@@ -45,12 +45,9 @@ public class UserAddressPanel extends ContentPanel
 		super("Address");
 		
 		callback = cb;
+		setContent(initWidget());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chaosinmotion.caredemo.client.panels.ContentPanel#initWidget()
-	 */
-	@Override
 	protected Widget initWidget()
 	{
 		table = new FlexTable();

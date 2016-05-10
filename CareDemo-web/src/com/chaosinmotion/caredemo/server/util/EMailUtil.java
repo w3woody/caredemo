@@ -132,6 +132,13 @@ public class EMailUtil
                 path + "?token=" + token;
         sendMessage(to,"CareDemo Reset Password",body);
     }
+    
+    public static void sendOnboardMessage(String to, String path, String token)
+    {
+        String body = "You may use the following link to reset your password:\n\n" +
+                path + "?token=" + token;
+        sendMessage(to,"CareDemo Reset Password",body);
+    }
 }
 
 

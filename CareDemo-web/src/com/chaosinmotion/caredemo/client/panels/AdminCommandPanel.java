@@ -22,9 +22,10 @@ public class AdminCommandPanel extends ContentPanel
 	public AdminCommandPanel()
 	{
 		super("Administrator");
+		
+		setContent(initWidget());
 	}
 
-	@Override
 	protected Widget initWidget()
 	{
 		vpanel = new VerticalPanel();

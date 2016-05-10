@@ -101,4 +101,9 @@ public interface Errors
 	 * Incorrect parameters
 	 */
 	public int INCORRECTPARAMS = 17;
+
+	/**
+	 * User does not exist
+	 */
+	public int NOSUCHUSER = 18;
 }

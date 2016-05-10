@@ -37,12 +37,10 @@ public class ResetPasswordPanel extends ContentPanel
 	public ResetPasswordPanel()
 	{
 		super("Reset Password");
+
+		setContent(initWidget());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chaosinmotion.caredemo.client.panels.ContentPanel#initWidget()
-	 */
-	@Override
 	protected Widget initWidget()
 	{
 		FlexTable table = new FlexTable();

@@ -17,9 +17,11 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class ContentPanel extends Composite
 {
+	private FlexTable panel;
+	
 	protected ContentPanel(String title)
 	{
-		FlexTable panel = new FlexTable();
+		panel = new FlexTable();
 		
 		panel.setBorderWidth(0);
 		panel.setCellPadding(0);
@@ -28,13 +30,13 @@ public abstract class ContentPanel extends Composite
 		panel.setStyleName("contentPanel");
 		panel.setText(0, 0, title);
 		panel.getCellFormatter().setStyleName(0, 0, "contentPanelTitle");
-
-		Widget w = initWidget();
+	}
+	
+	protected void setContent(Widget w)
+	{
 		w.setWidth("100%");
 		panel.setWidget(1, 0, w);
 
-		initWidget(panel);
+		super.initWidget(panel);
 	}
-	
-	protected abstract Widget initWidget();
 }

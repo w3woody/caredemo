@@ -43,12 +43,9 @@ public class UserPhonePanel extends ContentPanel
 		super("Phones");
 		
 		callback = cb;
+		setContent(initWidget());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chaosinmotion.caredemo.client.panels.ContentPanel#initWidget()
-	 */
-	@Override
 	protected Widget initWidget()
 	{
 		table = new FlexTable();

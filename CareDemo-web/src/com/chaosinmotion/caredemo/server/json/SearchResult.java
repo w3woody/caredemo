@@ -21,9 +21,10 @@ public class SearchResult extends ReturnResult
 	 * @param name
 	 * @param list
 	 */
-	public void insertResult(int userID, String email, String name, Integer[] acl)
+	public void insertResult(int userID, String username, String email, String name, Integer[] acl)
 	{
 		JSONObject obj = new JSONObject();
+		obj.put("username", username);
 		obj.put("userid", userID);
 		obj.put("email", email);
 		obj.put("name", name);

@@ -4,6 +4,8 @@
  */
 package com.chaosinmotion.caredemo.client.panels;
 
+import com.chaosinmotion.caredemo.client.dialogs.AddUserDialog;
+import com.chaosinmotion.caredemo.client.dialogs.EditUserDialog;
 import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
@@ -42,12 +44,10 @@ public class UserPanel extends ContentPanel
 		} else {
 			page = 1;
 		}
+
+		setContent(initWidget());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.chaosinmotion.caredemo.client.panels.ContentPanel#initWidget()
-	 */
-	@Override
 	protected Widget initWidget()
 	{
 		table = new FlexTable();
@@ -78,9 +78,28 @@ public class UserPanel extends ContentPanel
 			@Override
 			public void onClick(ClickEvent event)
 			{
-				// TODO: Run onboarding for this
+				new AddUserDialog(new AddUserDialog.Callback() {
+					@Override
+					public void found(int userID)
+					{
+						doUpdateUser(userID);
+					}
+					
+					@Override
+					public void failure()
+					{
+					}
+					
+					@Override
+					public void created(int userID)
+					{
+						doUpdateUser(userID);
+					}
+				});
 			}
 		});
+		
+		doSearch();
 
 		return table;
 	}
@@ -129,12 +148,26 @@ public class UserPanel extends ContentPanel
 	
 	private void doUpdateUser(int userID)
 	{
-		
+		new EditUserDialog(userID, new EditUserDialog.Callback() {
+			@Override
+			public void success()
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void failure()
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
-	private void doDeleteUser(int userID)
+	private void doDeleteUser(final int userID)
 	{
-		
+		new MessageBox("TODO","Delete user todo");
 	}
 	
 	/**

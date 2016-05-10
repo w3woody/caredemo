@@ -31,8 +31,6 @@ public class CareDemo implements EntryPoint
 		hpanel.setSpacing(0);
 		toolPanel.add(hpanel);
 		
-		BarButton register = new BarButton("Register");
-		hpanel.add(register);
 		BarButton login = new BarButton("Login");
 		hpanel.add(login);
 		

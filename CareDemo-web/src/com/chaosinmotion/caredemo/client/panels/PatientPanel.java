@@ -16,9 +16,9 @@ public class PatientPanel extends ContentPanel
 	public PatientPanel()
 	{
 		super("Patient Care Information");
+		setContent(initWidget());
 	}
 
-	@Override
 	protected Widget initWidget()
 	{
 		Label l = new Label("This area would contain the patient care information " +

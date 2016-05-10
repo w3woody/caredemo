@@ -29,17 +29,21 @@
 #	username: the username used to log in
 #	password: the hashed password
 #
+#	onboardtoken: the token generated for onboarding.
+#
 #	email: the e-mail for password recovery
 #	name: the user's name
 
 CREATE TABLE Users (
 	userid serial not null primary key,
-	username text unique not null,
+	username text unique,
+	
+	onboardtoken text unique,
 	
 	email text unique not null,
 	name text not null,
 	
-	password varchar(128) not null
+	password varchar(128)
 );
 
 CREATE INDEX UsersIX1 on Users ( username );
@@ -85,7 +89,7 @@ CREATE INDEX UserAddressIX1 on UserAddress ( userid );
 #
 #		User phone information. This is a phone number associated with the user
 
-CREATE TABLE useraccesscontrolddd (
+CREATE TABLE UserPhone (
 	phoneid serial not null primary key,
 	userid int not null,
 	

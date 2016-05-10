@@ -43,18 +43,55 @@ public class Profile
 	 * Either returns the user ID, or 0 if the user ID cannot be edited
 	 * @param req
 	 * @return
+	 * @throws SQLException 
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	private int getUserID(JSONObject req, UserRecord u)
+	private int getUserID(JSONObject req, UserRecord u) throws SQLException, ClassNotFoundException, IOException
 	{
 		int userID = req.optInt("userid", 0);
 		if (userID == 0) {
 			return u.getUserID();
 		} else if (userID == u.getUserID()) {
 			return userID;
-		} else if (!u.hasAccess(ACE.Administrator)) {
+		} else if (!u.hasAccess(ACE.Administrator) && !u.hasAccess(ACE.HealthCareProvider)) {
 			return 0;
 		} else {
-			return userID;
+			/*
+			 * 	Determine we can access based on type
+			 */
+			
+			Connection c = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+					
+			try {
+				String extra = u.hasAccess(ACE.Administrator) ?
+						"ace in ( 1, 2 )" : "ace in ( 3 )";
+				c = Database.get();
+				ps = c.prepareStatement(
+						"SELECT count(*) "
+						+ "FROM UserAccessControlList "
+						+ "WHERE userid = ? "
+						+ "AND " + extra);
+				ps.setInt(1, userID);
+				rs = ps.executeQuery();
+				int ct = 0;
+				if (rs.next()) {
+					ct = rs.getInt(1);
+				}
+				
+				if (ct == 0) {
+					return 0;
+				} else {
+					return userID;
+				}
+			}
+			finally {
+				if (c != null) c.close();
+				if (ps != null) ps.close();
+				if (rs != null) rs.close();
+			}
 		}
 	}
 
@@ -90,7 +127,7 @@ public class Profile
 		try {
 			c = Database.get();
 			ps = c.prepareStatement(
-					"SELECT email, name "
+					"SELECT username, email, name "
 							+ "FROM Users "
 							+ "WHERE userid = ?");
 			ps.setInt(1, userID);
@@ -98,10 +135,11 @@ public class Profile
 
 			UserReturnResult result;
 			if (rs.next()) {
-				String email = rs.getString(1);
-				String name = rs.getString(2);
+				String username = rs.getString(1);
+				String email = rs.getString(2);
+				String name = rs.getString(3);
 				
-				result = new UserReturnResult(u.getUserID(), email, name);
+				result = new UserReturnResult(userID, username, email, name);
 				
 			} else {
 				return new ReturnResult(Errors.NOTLOGGEDIN,"User no longer exists");

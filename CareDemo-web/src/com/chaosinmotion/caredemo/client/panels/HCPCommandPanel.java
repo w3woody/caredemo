@@ -22,9 +22,9 @@ public class HCPCommandPanel extends ContentPanel
 	public HCPCommandPanel()
 	{
 		super("Patient Care");
+		setContent(initWidget());
 	}
 
-	@Override
 	protected Widget initWidget()
 	{
 		vpanel = new VerticalPanel();

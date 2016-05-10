@@ -15,6 +15,7 @@ import org.json.JSONObject;
 public class UserReturnResult extends ReturnResult
 {
 	private int userID;
+	private String username;
 	private String email;
 	private String name;
 	private Collection<Integer> acl;
@@ -25,8 +26,9 @@ public class UserReturnResult extends ReturnResult
 	 * @param em Email
 	 * @param n Name
 	 */
-	public UserReturnResult(int uid, String em, String n)
+	public UserReturnResult(int uid, String un, String em, String n)
 	{
+		username = un;
 		userID = uid;
 		email = em;
 		name = n;
@@ -44,6 +46,7 @@ public class UserReturnResult extends ReturnResult
 	public JSONObject returnData()
 	{
 		JSONObject obj = new JSONObject();
+		obj.put("username", username);
 		obj.put("userid", userID);
 		obj.put("email", email);
 		obj.put("name", name);

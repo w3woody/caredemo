@@ -331,7 +331,7 @@ public class Mobile
 		ResultSet rs = null;
 		try {
 			c = Database.get();
-			ps = c.prepareStatement("SELECT Users.userid, Users.email, Users.name " +
+			ps = c.prepareStatement("SELECT Users.userid, Users.username, Users.email, Users.name " +
 							   		"FROM Users, MobileDevices " +
 							   		"WHERE Users.userid = MobileDevices.userid " +
 							   		"AND MobileDevices.token = ?");
@@ -341,10 +341,11 @@ public class Mobile
 			UserReturnResult result;
 			if (rs.next()) {
 				userID = rs.getInt(1);
-				String email = rs.getString(2);
-				String name = rs.getString(3);
+				String username = rs.getString(2);
+				String email = rs.getString(3);
+				String name = rs.getString(4);
 				
-				result = new UserReturnResult(userID, email, name);
+				result = new UserReturnResult(userID, username, email, name);
 				
 			} else {
 				return new ReturnResult(Errors.INCORRECTCREDENTIALS,"Wrong token");

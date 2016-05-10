@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import com.chaosinmotion.caredemo.server.commands.Manage;
 import com.chaosinmotion.caredemo.server.commands.Users;
 import com.chaosinmotion.caredemo.server.json.OuterResult;
 import com.chaosinmotion.caredemo.server.json.ReturnResult;
@@ -189,7 +190,7 @@ public class SecureServlet extends HttpServlet
 				interfaces.put(className, proxy);
 				
 				// special case: if user object, populate server URL
-				if (groupName.equalsIgnoreCase("users")) {
+				if (groupName.equalsIgnoreCase("users") || groupName.equalsIgnoreCase("manage")) {
 					String scheme = httpRequest.getScheme();
 					String server = httpRequest.getServerName();
 					int port = httpRequest.getServerPort();
@@ -199,7 +200,11 @@ public class SecureServlet extends HttpServlet
 						server = scheme + "://" + server + ":" + port;
 					}
 
-					((Users)proxy).setServer(server);
+					if (groupName.equalsIgnoreCase("users")) {
+						((Users)proxy).setServer(server);
+					} else {
+						((Manage)proxy).setServer(server);
+					}
 				}
 			}
 		}

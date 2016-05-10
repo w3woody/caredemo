@@ -70,7 +70,7 @@ public class Users
 		try {
 			c = Database.get();
 			ps = c.prepareStatement(
-					"SELECT userid, email, name "
+					"SELECT userid, username, email, name "
 							+ "FROM Users "
 							+ "WHERE username = ? AND password = ?");
 			ps.setString(1, request.optString("username"));
@@ -81,10 +81,11 @@ public class Users
 			UserReturnResult result;
 			if (rs.next()) {
 				userID = rs.getInt(1);
-				String email = rs.getString(2);
-				String name = rs.getString(3);
+				String username = rs.getString(2);
+				String email = rs.getString(3);
+				String name = rs.getString(4);
 				
-				result = new UserReturnResult(userID, email, name);
+				result = new UserReturnResult(userID, username, email, name);
 				
 			} else {
 				return new ReturnResult(Errors.INCORRECTCREDENTIALS,"Wrong credentials");
@@ -142,7 +143,7 @@ public class Users
 		try {
 			c = Database.get();
 			ps = c.prepareStatement(
-					"SELECT email, name "
+					"SELECT username, email, name "
 							+ "FROM Users "
 							+ "WHERE userid = ?");
 			ps.setInt(1, u.getUserID());
@@ -150,10 +151,11 @@ public class Users
 
 			UserReturnResult result;
 			if (rs.next()) {
-				String email = rs.getString(1);
-				String name = rs.getString(2);
+				String username = rs.getString(1);
+				String email = rs.getString(2);
+				String name = rs.getString(3);
 				
-				result = new UserReturnResult(u.getUserID(), email, name);
+				result = new UserReturnResult(u.getUserID(), username, email, name);
 				
 			} else {
 				return new ReturnResult(Errors.NOTLOGGEDIN,"User no longer exists");
@@ -258,7 +260,7 @@ public class Users
 			 * Extract user information and return
 			 */
 			ps = c.prepareStatement(
-					"SELECT userid, email, name " +
+					"SELECT userid, username, email, name " +
 					"FROM Users " +
 					"WHERE userid = ?");
 			ps.setInt(1, userid);
@@ -268,10 +270,11 @@ public class Users
 			UserReturnResult result;
 			if (rs.next()) {
 				userID = rs.getInt(1);
-				String email = rs.getString(2);
-				String name = rs.getString(3);
+				String username = rs.getString(2);
+				String email = rs.getString(3);
+				String name = rs.getString(4);
 				
-				result = new UserReturnResult(userID, email, name);
+				result = new UserReturnResult(userID, username, email, name);
 				
 			} else {
 				return new ReturnResult(Errors.INCORRECTCREDENTIALS,"Wrong credentials");
