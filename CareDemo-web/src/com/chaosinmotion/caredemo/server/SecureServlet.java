@@ -124,8 +124,9 @@ public class SecureServlet extends HttpServlet
 				BigInteger bi = new BigInteger(pubSecret);
 				DiffieHellman dh = new DiffieHellman();
 				BigInteger secret = dh.calcSharedSecret(bi);
-				System.out.println("Server: " + secret.toString());
-				byte[] secretKey = secret.toByteArray();
+				String skey = secret.toString();
+				System.out.println("Server: " + skey);
+				byte[] secretKey = skey.getBytes("UTF-8");
 				Blowfish blowfish = new Blowfish(secretKey);
 				session.setAttribute("enc", blowfish);
 				

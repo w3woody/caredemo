@@ -18,6 +18,8 @@
 		EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */; };
 		EF1389F91CE4DB32000F8988 /* SCBlowfish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F71CE4DB32000F8988 /* SCBlowfish.cpp */; };
 		EF1389FC1CE4DB4C000F8988 /* SCDiffieHellman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */; };
+		EF1389FF1CE4E154000F8988 /* CDNetwork.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF1389FE1CE4E154000F8988 /* CDNetwork.mm */; };
+		EF138A021CE4E99C000F8988 /* CDNetworkCookies.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A011CE4E99C000F8988 /* CDNetworkCookies.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		EF1389F81CE4DB32000F8988 /* SCBlowfish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCBlowfish.h; path = Network/SCBlowfish.h; sourceTree = "<group>"; };
 		EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCDiffieHellman.cpp; path = Network/SCDiffieHellman.cpp; sourceTree = "<group>"; };
 		EF1389FB1CE4DB4C000F8988 /* SCDiffieHellman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCDiffieHellman.h; path = Network/SCDiffieHellman.h; sourceTree = "<group>"; };
+		EF1389FD1CE4E154000F8988 /* CDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDNetwork.h; path = Network/CDNetwork.h; sourceTree = "<group>"; };
+		EF1389FE1CE4E154000F8988 /* CDNetwork.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CDNetwork.mm; path = Network/CDNetwork.mm; sourceTree = "<group>"; };
+		EF138A001CE4E99C000F8988 /* CDNetworkCookies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDNetworkCookies.h; path = Network/CDNetworkCookies.h; sourceTree = "<group>"; };
+		EF138A011CE4E99C000F8988 /* CDNetworkCookies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDNetworkCookies.m; path = Network/CDNetworkCookies.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,10 @@
 				EF1389F81CE4DB32000F8988 /* SCBlowfish.h */,
 				EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */,
 				EF1389FB1CE4DB4C000F8988 /* SCDiffieHellman.h */,
+				EF1389FD1CE4E154000F8988 /* CDNetwork.h */,
+				EF1389FE1CE4E154000F8988 /* CDNetwork.mm */,
+				EF138A001CE4E99C000F8988 /* CDNetworkCookies.h */,
+				EF138A011CE4E99C000F8988 /* CDNetworkCookies.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -240,11 +250,13 @@
 			files = (
 				EF1389FC1CE4DB4C000F8988 /* SCDiffieHellman.cpp in Sources */,
 				EF1389D41CE4D90F000F8988 /* ViewController.m in Sources */,
+				EF138A021CE4E99C000F8988 /* CDNetworkCookies.m in Sources */,
 				EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */,
 				EF1389D11CE4D90F000F8988 /* AppDelegate.m in Sources */,
 				EF1389CE1CE4D90F000F8988 /* main.m in Sources */,
 				EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */,
 				EF1389F91CE4DB32000F8988 /* SCBlowfish.cpp in Sources */,
+				EF1389FF1CE4E154000F8988 /* CDNetwork.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

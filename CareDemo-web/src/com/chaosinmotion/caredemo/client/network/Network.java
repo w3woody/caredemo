@@ -279,7 +279,8 @@ public class Network
 						/*
 						 * Generate the encryption object
 						 */
-						byte[] secretKey = secret.toByteArray();
+						String skey = secret.toString();
+						byte[] secretKey = skey.getBytes("UTF-8");
 						encryption = new Blowfish(secretKey);
 						
 						res.success();
