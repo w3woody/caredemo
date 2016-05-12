@@ -9,13 +9,12 @@ import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.dialogs.PhoneDialog;
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -26,7 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class UserPhonePanel extends ContentPanel
 {
 	private JSONArray array;
-	private FlexTable table;
+	private DialogWidget table;
 	
 	public interface Callback
 	{
@@ -48,16 +47,7 @@ public class UserPhonePanel extends ContentPanel
 
 	protected Widget initWidget()
 	{
-		table = new FlexTable();
-		table.setWidth("100%");
-		
-		table.setCellPadding(8);
-		table.setCellSpacing(0);
-		table.setBorderWidth(0);
-		
-		table.getColumnFormatter().setWidth(0, "120px");
-		table.getColumnFormatter().setWidth(2, "90px");
-		
+		table = new DialogWidget(true);
 		return table;
 	}
 	
@@ -76,29 +66,21 @@ public class UserPhonePanel extends ContentPanel
 	 */
 	public void initialize(JSONArray addrArray)
 	{
-		table.removeAllRows();
+		table.clear();
 		
 		array = addrArray;
 		int i,len = addrArray.size();
 		for (i = 0; i < len; ++i) {
 			JSONObject obj = addrArray.get(i).isObject();
 			
-			String str = getValue(obj,"name");
-			if (str != null) {
-				table.setText(i, 0, str);
-				table.getCellFormatter().setStyleName(i, 0, "dialoglabel");
-			}
-
-			str = getValue(obj,"phone");
-			if (str != null) {
-				table.setText(i, 1, str);
-				table.getCellFormatter().setStyleName(i, 1, "dialoglabel");
-			}
-
-			HorizontalPanel hp = new HorizontalPanel();
-			table.getCellFormatter().setHorizontalAlignment(i, 2, HasHorizontalAlignment.ALIGN_RIGHT);
-			table.setWidget(i, 2, hp);
+			String name = getValue(obj,"name");
+			if (name == null) name = "";
 			
+			String phone = getValue(obj,"phone");
+			if (phone == null) phone = "";
+			
+			HorizontalPanel hp = table.addWideText(i, name, phone);
+
 			final int index = i;
 			BarButton update = new BarButton("Update");
 			hp.add(update);
@@ -120,9 +102,7 @@ public class UserPhonePanel extends ContentPanel
 			});
 		}
 
-		HorizontalPanel hp = new HorizontalPanel();
-		table.getCellFormatter().setHorizontalAlignment(i, 2, HasHorizontalAlignment.ALIGN_RIGHT);
-		table.setWidget(i, 2, hp);
+		HorizontalPanel hp = table.addWideText(i, "", "");
 		
 		BarButton update = new BarButton("Add");
 		hp.add(update);

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import com.chaosinmotion.caredemo.server.database.Database;
 import com.chaosinmotion.caredemo.server.json.ReturnResult;
@@ -298,7 +299,7 @@ public class Manage
 			 */
 			
 			String onboardUrl = serverURL + "/onboard.html";
-			EMailUtil.sendResetPassword(email, onboardUrl, uuid);
+			EMailUtil.sendOnboardMessage(email, onboardUrl, uuid);
 			
 			/*
 			 * Return the userID
@@ -312,6 +313,205 @@ public class Manage
 			if (ps != null) ps.close();
 			if (rs != null) rs.close();
 		}
+	}
 
+	/**
+	 * Update user data. An all-in-one request to update all the data associated
+	 * with a user.
+	 * @param cmd
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws IOException
+	 */
+	public ReturnResult updateUserData(String cmd, JSONObject request, HttpSession session) throws ClassNotFoundException, SQLException, IOException
+	{
+		/*
+		 * Standard preamble
+		 */
+		UserRecord u = (UserRecord)session.getAttribute("userid");
+		if (u == null) {
+			return new ReturnResult(Errors.NOTLOGGEDIN,"Not logged in");
+		}
+		boolean adminFlag = request.optBoolean("admin");
+		if (adminFlag && !u.hasAccess(ACE.Administrator)) {
+			return new ReturnResult(Errors.ACCESSVIOLATION,"Access violation");
+		} else if (!adminFlag && !u.hasAccess(ACE.HealthCareProvider)) {
+			return new ReturnResult(Errors.ACCESSVIOLATION,"Access violation");
+		}
+		
+		int userID = request.optInt("userid", 0);
+		String email = request.optString("email");
+		String name = request.optString("name");
+		if ((userID == 0) || (email == null) || (name == null)) {
+			return new ReturnResult(Errors.MISSINGPARAM,"Missing param");
+		}
+		JSONArray ace = request.optJSONArray("ace");
+		JSONArray ct = request.optJSONArray("contents");
+		
+		if ((ace == null) || (ct == null)) {
+			return new ReturnResult(Errors.ACCESSVIOLATION,"Access violation");
+		}
+		
+		/*
+		 * Run update
+		 */
+		
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			c = Database.get();
+			
+			c.setAutoCommit(false);
+			// Update name/email
+			ps = c.prepareStatement(
+					"UPDATE Users SET name = ?, email = ? WHERE userid = ?");
+			ps.setString(1, name);
+			ps.setString(2, email);
+			ps.setInt(3, userID);
+        	ps.execute();
+        	ps.close();
+        	ps = null;
+        	
+        	// Update the ACE
+        	String list = adminFlag ? "( 1, 2 )" : "( 3 )";
+        	ps = c.prepareStatement("DELETE FROM UserAccessControlList WHERE " +
+        			"userid = ? AND ace in " + list);
+        	ps.setInt(1, userID);
+        	ps.execute();
+        	ps.close();
+        	ps = null;
+        	
+        	ps = c.prepareStatement("INSERT INTO UserAccessControlList ( userid, ace ) VALUES ( ?, ? )");
+        	int i,len = ace.length();
+        	for (i = 0; i < len; ++i) {
+        		int index = ace.getInt(i);
+        		if (adminFlag) {
+        			if ((index != 1) && (index != 2)) continue;
+        		} else {
+        			if (index != 3) continue;
+        		}
+        		
+        		ps.setInt(1, userID);
+        		ps.setInt(2, index);
+        		ps.execute();
+        	}
+        	ps.close();
+        	ps = null;
+        	
+        	// Start updating the address/phone.
+        	len = ct.length();
+        	for (i = 0; i < len; ++i) {
+        		JSONObject obj = ct.optJSONObject(i);
+        		
+        		String item = obj.optString("item");
+        		String reqType = obj.optString("cmd");
+        		
+        		if (item.equals("address")) {
+        			if (reqType.equals("add")) {
+        				ps = c.prepareStatement(
+        						"INSERT INTO UserAddress " +
+        						"    ( userid, name, addr1, addr2, city, state, postalcode ) " +
+        						"VALUES " +
+        						"    ( ?, ?, ?, ?, ?, ?, ? )");
+        				ps.setInt(1, userID);
+        				ps.setString(2, obj.optString("name"));
+        				ps.setString(3, obj.optString("addr1"));
+        				ps.setString(4, obj.optString("addr2"));
+        				ps.setString(5, obj.optString("city"));
+        				ps.setString(6, obj.optString("state"));
+        				ps.setString(7, obj.optString("postal"));
+        				ps.execute();
+        				ps.close();
+        	        	ps = null;
+        						
+        			} else if (reqType.equals("update")) {
+        				ps = c.prepareStatement(
+        						"UPDATE UserAddress " +
+        						"SET name = ?, " +
+        						"    addr1 = ?, " +
+        						"    addr2 = ?, " +
+        						"    city = ?, " +
+        						"    state = ?, " +
+        						"    postalcode = ? " +
+        						"WHERE userid = ? " + 
+        						"AND addrid = ?");
+        				ps.setString(1, obj.optString("name"));
+        				ps.setString(2, obj.optString("addr1"));
+        				ps.setString(3, obj.optString("addr2"));
+        				ps.setString(4, obj.optString("city"));
+        				ps.setString(5, obj.optString("state"));
+        				ps.setString(6, obj.optString("postal"));
+        				ps.setInt(7, userID);
+        				ps.setInt(8, obj.optInt("index"));
+        				ps.execute();
+        				ps.close();
+        	        	ps = null;
+        				
+        			} else if (reqType.equals("delete")) {
+        				ps = c.prepareStatement(
+        						"DELETE FROM UserAddress " + 
+        						"WHERE userid = ? AND addrid = ?");
+        				ps.setInt(1, userID);
+        				ps.setInt(2, obj.optInt("index"));
+        				ps.execute();
+        				ps.close();
+        	        	ps = null;
+        			}
+        		} else if (item.equals("phone")) {
+        			if (reqType.equals("add")) {
+        				ps = c.prepareStatement(
+        						"INSERT INTO UserPhone " +
+        						"    ( userid, name, phone ) " +
+        						"VALUES " +
+        						"    ( ?, ?, ? )");
+        				ps.setInt(1, userID);
+        				ps.setString(2, obj.optString("name"));
+        				ps.setString(3, obj.optString("phone"));
+        				ps.execute();
+        				ps.close();
+        	        	ps = null;
+        						
+        			} else if (reqType.equals("update")) {
+        				ps = c.prepareStatement(
+        						"UPDATE UserPhone " +
+        						"SET name = ?, " +
+        						"    phone = ? " +
+        						"WHERE userid = ? " + 
+        						"AND phoneid = ?");
+        				ps.setString(1, obj.optString("name"));
+        				ps.setString(2, obj.optString("phone"));
+        				ps.setInt(3, userID);
+        				ps.setInt(4, obj.optInt("index"));
+        				ps.execute();
+        				ps.close();
+        	        	ps = null;
+        				
+        			} else if (reqType.equals("delete")) {
+        				ps = c.prepareStatement(
+        						"DELETE FROM UserPhone " + 
+        						"WHERE userid = ? AND phoneid = ?");
+        				ps.setInt(1, userID);
+        				ps.setInt(2, obj.optInt("index"));
+        				ps.execute();
+        				ps.close();
+        	        	ps = null;
+        			}
+        		}
+        	}
+        	
+        	c.commit();
+        	c.setAutoCommit(true);
+        	
+			return new ReturnResult();
+		}
+		finally {
+			if (c != null) c.close();
+			if (ps != null) ps.close();
+			if (rs != null) rs.close();
+		}
 	}
 }

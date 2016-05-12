@@ -2,7 +2,6 @@
 package com.chaosinmotion.caredemo.client;
 
 import com.chaosinmotion.caredemo.client.dialogs.LoginDialog;
-import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -54,35 +53,5 @@ public class CareDemo implements EntryPoint
 				});
 			}
 		});
-		
-//		Label l = new Label("Hello world...");
-//		RootPanel.get().add(l);
-//		
-//		JSONObject req = new JSONObject();
-//		req.put("cmd", new JSONString("status"));
-//		
-//		Network.get().request(req,new Network.ResultCallback() {
-//			
-//			@Override
-//			public void exception()
-//			{
-//				Label l = new Label("failure");
-//				RootPanel.get().add(l);
-//			}
-//
-//			@Override
-//			public void response(JSONObject result)
-//			{
-//				Label l = new Label("success: " + result.toString());
-//				RootPanel.get().add(l);
-//			}
-//
-//			@Override
-//			public void error(int serverError)
-//			{
-//				Label l = new Label("error " + serverError);
-//				RootPanel.get().add(l);
-//			}
-//		});
 	}
 }

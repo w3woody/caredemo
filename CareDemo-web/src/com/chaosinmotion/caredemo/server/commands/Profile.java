@@ -57,41 +57,7 @@ public class Profile
 		} else if (!u.hasAccess(ACE.Administrator) && !u.hasAccess(ACE.HealthCareProvider)) {
 			return 0;
 		} else {
-			/*
-			 * 	Determine we can access based on type
-			 */
-			
-			Connection c = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-					
-			try {
-				String extra = u.hasAccess(ACE.Administrator) ?
-						"ace in ( 1, 2 )" : "ace in ( 3 )";
-				c = Database.get();
-				ps = c.prepareStatement(
-						"SELECT count(*) "
-						+ "FROM UserAccessControlList "
-						+ "WHERE userid = ? "
-						+ "AND " + extra);
-				ps.setInt(1, userID);
-				rs = ps.executeQuery();
-				int ct = 0;
-				if (rs.next()) {
-					ct = rs.getInt(1);
-				}
-				
-				if (ct == 0) {
-					return 0;
-				} else {
-					return userID;
-				}
-			}
-			finally {
-				if (c != null) c.close();
-				if (ps != null) ps.close();
-				if (rs != null) rs.close();
-			}
+			return userID;
 		}
 	}
 

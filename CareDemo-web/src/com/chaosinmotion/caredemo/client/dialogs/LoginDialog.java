@@ -7,6 +7,7 @@ package com.chaosinmotion.caredemo.client.dialogs;
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.util.UserInfo;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.chaosinmotion.caredemo.shared.Constants;
 import com.chaosinmotion.caredemo.shared.SHA256Hash;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,7 +18,6 @@ import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -41,7 +41,7 @@ public class LoginDialog extends DialogBox
 	}
 	
 	private Callback callback;
-	private FlexTable table;
+	private DialogWidget table;
 	private BarButton doneButton;
 	
 	private boolean forgotFlag;
@@ -61,20 +61,11 @@ public class LoginDialog extends DialogBox
 		VerticalPanel vpanel = new VerticalPanel();
 		vpanel.setWidth("400px");
 
-		table = new FlexTable();
+		table = new DialogWidget();
 		table.setWidth("100%");
 		
 		vpanel.add(table);
 		
-		/*
-		 * 	Format table
-		 */
-		
-		table.setCellPadding(8);
-		table.setCellPadding(0);
-		table.setBorderWidth(0);
-		table.getColumnFormatter().setWidth(0, "120px");
-
 		/*
 		 *  Add buttons
 		 */
@@ -137,7 +128,7 @@ public class LoginDialog extends DialogBox
 		CheckBox cbox = new CheckBox("Forgot Password");
 		cbox.setValue(select);
 		cbox.setStyleName("dialogcheckbox");
-		table.setWidget(row, 1, cbox);
+		table.addRow(row,"",cbox);
 		
 		cbox.addClickHandler(new ClickHandler() {
 			@Override
@@ -158,14 +149,9 @@ public class LoginDialog extends DialogBox
 		
 		doneButton.setText("Forgot Password");
 		
-		table.removeAllRows();
+		table.clear();
 		
-		table.setText(0, 0, "E-Mail:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
-		
-		username = new TextBox();
-		username.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, username);
+		username = table.addTextBox(0, "E-Mail:");
 		
 		insertForgetSelector(1, true);
 	}
@@ -179,21 +165,10 @@ public class LoginDialog extends DialogBox
 		
 		doneButton.setText("Login");
 		
-		table.removeAllRows();
+		table.clear();
 		
-		table.setText(0, 0, "Username:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
-		
-		username = new TextBox();
-		username.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, username);
-
-		table.setText(1, 0, "Password:");
-		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
-		
-		password = new PasswordTextBox();
-		password.setStyleName("dialogtextbox");
-		table.setWidget(1, 1, password);
+		username = table.addTextBox(0, "Username:");
+		password = table.addPasswordTextBox(1, "Password:");
 
 		insertForgetSelector(2, false);
 	}

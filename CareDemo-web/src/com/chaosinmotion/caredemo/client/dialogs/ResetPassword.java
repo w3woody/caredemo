@@ -6,6 +6,7 @@ package com.chaosinmotion.caredemo.client.dialogs;
 
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.chaosinmotion.caredemo.shared.Constants;
 import com.chaosinmotion.caredemo.shared.SHA256Hash;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,7 +16,6 @@ import com.google.gwt.json.client.JSONString;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -40,7 +40,7 @@ public class ResetPassword extends DialogBox
 	private String token;
 	
 	private Callback callback;
-	private FlexTable table;
+	private DialogWidget table;
 	private BarButton doneButton;
 	
 	private PasswordTextBox password1;
@@ -60,7 +60,7 @@ public class ResetPassword extends DialogBox
 		VerticalPanel vpanel = new VerticalPanel();
 		vpanel.setWidth("400px");
 
-		table = new FlexTable();
+		table = new DialogWidget();
 		table.setWidth("100%");
 		
 		vpanel.add(table);
@@ -68,25 +68,9 @@ public class ResetPassword extends DialogBox
 		/*
 		 * 	Format table
 		 */
-		
-		table.setCellPadding(8);
-		table.setCellPadding(0);
-		table.setBorderWidth(0);
-		table.getColumnFormatter().setWidth(0, "120px");
 
-		table.setText(0, 0, "Password:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
-		
-		password1 = new PasswordTextBox();
-		password1.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, password1);
-
-		table.setText(1, 0, "Retype Password:");
-		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
-		
-		password2 = new PasswordTextBox();
-		password2.setStyleName("dialogtextbox");
-		table.setWidget(1, 1, password2);
+		password1 = table.addPasswordTextBox(1, "Password:");
+		password2 = table.addPasswordTextBox(1, "Retype Password:");
 
 		/*
 		 *  Add buttons

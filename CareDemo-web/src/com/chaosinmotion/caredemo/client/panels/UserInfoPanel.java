@@ -9,14 +9,12 @@ import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.util.UserInfo;
 import com.chaosinmotion.caredemo.client.util.UserInfoData;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.chaosinmotion.caredemo.shared.Errors;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -41,37 +39,16 @@ public class UserInfoPanel extends ContentPanel
 
 	protected Widget initWidget()
 	{
-		FlexTable table = new FlexTable();
-		table.setWidth("100%");
-		
-		table.setCellPadding(8);
-		table.setCellSpacing(0);
-		table.setBorderWidth(0);
-		
-		table.getColumnFormatter().setWidth(0, "120px");
+		DialogWidget table = new DialogWidget();
 		
 		/*
 		 * Populate the name, e-mail, and provide buttons for saving
 		 */
 		
-		table.setText(0, 0, "Name:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
+		name = table.addTextBox(0, "Name:");
+		email = table.addTextBox(1, "E-Mail:");
 		
-		name = new TextBox();
-		name.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, name);
-		
-		table.setText(1, 0, "EMail:");
-		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
-		
-		email = new TextBox();
-		email.setStyleName("dialogtextbox");
-		table.setWidget(1, 1, email);
-		
-		table.getFlexCellFormatter().setColSpan(2, 0, 2);
-		HorizontalPanel hpanel = new HorizontalPanel();
-		table.setWidget(2, 0, hpanel);
-		table.getCellFormatter().setAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT, HasVerticalAlignment.ALIGN_MIDDLE);
+		HorizontalPanel hpanel = table.addButtonPanel(2);
 				
 		BarButton barButton = new BarButton("Save");
 		hpanel.add(barButton);

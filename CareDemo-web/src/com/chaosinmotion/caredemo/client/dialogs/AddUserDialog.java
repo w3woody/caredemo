@@ -6,6 +6,7 @@ package com.chaosinmotion.caredemo.client.dialogs;
 
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.chaosinmotion.caredemo.shared.Errors;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -13,7 +14,6 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -36,7 +36,7 @@ public class AddUserDialog extends DialogBox
 	}
 	
 	private Callback callback;
-	private FlexTable table;
+	private DialogWidget table;
 
 	private TextBox name;
 	private TextBox email;
@@ -54,7 +54,7 @@ public class AddUserDialog extends DialogBox
 		VerticalPanel vpanel = new VerticalPanel();
 		vpanel.setWidth("400px");
 
-		table = new FlexTable();
+		table = new DialogWidget();
 		table.setWidth("100%");
 		
 		vpanel.add(table);
@@ -63,13 +63,8 @@ public class AddUserDialog extends DialogBox
 		 * 	Format table
 		 */
 		
-		table.setCellPadding(8);
-		table.setCellPadding(0);
-		table.setBorderWidth(0);
-		table.getColumnFormatter().setWidth(0, "120px");
-
-		name = addTableRow(0,"Name:");
-		email = addTableRow(1,"EMail:");
+		name = table.addTextBox(0,"Name:");
+		email = table.addTextBox(1,"EMail:");
 
 		/*
 		 *  Add buttons
@@ -121,18 +116,6 @@ public class AddUserDialog extends DialogBox
 				setPopupPosition(xpos, ypos);
 			}
 		});
-	}
-
-	private TextBox addTableRow(int row, String label)
-	{
-		table.setText(row, 0, label);
-		table.getCellFormatter().setStyleName(row, 0, "dialoglabel");
-		
-		TextBox text = new TextBox();
-		text.setStyleName("dialogtextbox");
-		table.setWidget(row, 1, text);
-		
-		return text;
 	}
 	
 	/**
@@ -217,7 +200,8 @@ public class AddUserDialog extends DialogBox
 			@Override
 			public void response(JSONObject result)
 			{
-				int userID = (int)(result.get("userid").isNumber().doubleValue());
+				JSONObject data = result.get("data").isObject();
+				int userID = (int)(data.get("userid").isNumber().doubleValue());
 				callback.created(userID);
 				hide();
 			}

@@ -9,13 +9,12 @@ import com.chaosinmotion.caredemo.client.dialogs.ConfirmationBox;
 import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -28,7 +27,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class UserAddressPanel extends ContentPanel
 {
 	private JSONArray array;
-	private FlexTable table;
+	private DialogWidget table;
 	
 	public interface Callback
 	{
@@ -50,16 +49,7 @@ public class UserAddressPanel extends ContentPanel
 
 	protected Widget initWidget()
 	{
-		table = new FlexTable();
-		table.setWidth("100%");
-		
-		table.setCellPadding(8);
-		table.setCellSpacing(0);
-		table.setBorderWidth(0);
-		
-		table.getColumnFormatter().setWidth(0, "120px");
-		table.getColumnFormatter().setWidth(2, "90px");
-		
+		table = new DialogWidget(true);
 		return table;
 	}
 	
@@ -125,7 +115,7 @@ public class UserAddressPanel extends ContentPanel
 	 */
 	public void initialize(JSONArray addrArray)
 	{
-		table.removeAllRows();
+		table.clear();
 		
 		array = addrArray;
 		int i,len = addrArray.size();
@@ -133,17 +123,11 @@ public class UserAddressPanel extends ContentPanel
 			JSONObject obj = addrArray.get(i).isObject();
 			
 			String str = getValue(obj,"name");
-			if (str != null) {
-				table.setText(i, 0, str);
-				table.getCellFormatter().setStyleName(i, 0, "dialoglabel");
-			}
+			if (str == null) str = "";
 			
 			VerticalPanel vp = formatAddress(obj);
-			table.setWidget(i, 1, vp);
 			
-			HorizontalPanel hp = new HorizontalPanel();
-			table.getCellFormatter().setHorizontalAlignment(i, 2, HasHorizontalAlignment.ALIGN_RIGHT);
-			table.setWidget(i, 2, hp);
+			HorizontalPanel hp = table.addWideWidget(i, str, vp);
 			
 			final int addrIndex = i;
 			BarButton update = new BarButton("Update");
@@ -166,9 +150,7 @@ public class UserAddressPanel extends ContentPanel
 			});
 		}
 
-		HorizontalPanel hp = new HorizontalPanel();
-		table.getCellFormatter().setHorizontalAlignment(i, 2, HasHorizontalAlignment.ALIGN_RIGHT);
-		table.setWidget(i, 2, hp);
+		HorizontalPanel hp = table.addWideText(i, "", "");
 		
 		BarButton update = new BarButton("Add");
 		hp.add(update);

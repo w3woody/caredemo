@@ -8,15 +8,13 @@ import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.util.PasswordComplexity;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.chaosinmotion.caredemo.shared.Constants;
 import com.chaosinmotion.caredemo.shared.SHA256Hash;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -43,46 +41,17 @@ public class ResetPasswordPanel extends ContentPanel
 
 	protected Widget initWidget()
 	{
-		FlexTable table = new FlexTable();
-		table.setWidth("100%");
-		
-		table.setCellPadding(8);
-		table.setCellSpacing(0);
-		table.setBorderWidth(0);
-		
-		table.getColumnFormatter().setWidth(0, "120px");
+		DialogWidget table = new DialogWidget();
 		
 		/*
 		 * Populate the name, e-mail, and provide buttons for saving
 		 */
 		
-		table.setText(0, 0, "Current Password:");
-		table.getCellFormatter().setStyleName(0, 0, "dialoglabel");
+		oldPassword = table.addPasswordTextBox(0, "Current Password:");
+		newPassword1 = table.addPasswordTextBox(1, "New Password:");
+		newPassword2 = table.addPasswordTextBox(2, "Retype Password:");
 		
-		oldPassword = new PasswordTextBox();
-		oldPassword.setStyleName("dialogtextbox");
-		table.setWidget(0, 1, oldPassword);
-		
-		table.setText(1, 0, "New Password:");
-		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
-		
-		newPassword1 = new PasswordTextBox();
-		newPassword1.setStyleName("dialogtextbox");
-		table.setWidget(1, 1, newPassword1);
-		
-		table.setText(2, 0, "Retype Password:");
-		table.getCellFormatter().setStyleName(2, 0, "dialoglabel");
-		
-		newPassword2 = new PasswordTextBox();
-		newPassword2.setStyleName("dialogtextbox");
-		table.setWidget(2, 1, newPassword2);
-		
-		
-		table.getFlexCellFormatter().setColSpan(3, 0, 2);
-		HorizontalPanel hpanel = new HorizontalPanel();
-		table.setWidget(3, 0, hpanel);
-		table.getCellFormatter().setAlignment(3, 0, HasHorizontalAlignment.ALIGN_RIGHT, HasVerticalAlignment.ALIGN_MIDDLE);
-				
+		HorizontalPanel hpanel = table.addButtonPanel(3);
 		BarButton barButton = new BarButton("Update Password");
 		hpanel.add(barButton);
 		barButton.addClickHandler(new ClickHandler() {

@@ -5,8 +5,8 @@
 package com.chaosinmotion.caredemo.client.panels;
 
 import com.chaosinmotion.caredemo.client.dialogs.AddUserDialog;
-import com.chaosinmotion.caredemo.client.dialogs.EditUserDialog;
 import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
+import com.chaosinmotion.caredemo.client.dialogs.edit.EditUserDialog;
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
 import com.chaosinmotion.caredemo.client.widgets.PromptTextBox;
@@ -148,19 +148,18 @@ public class UserPanel extends ContentPanel
 	
 	private void doUpdateUser(int userID)
 	{
-		new EditUserDialog(userID, new EditUserDialog.Callback() {
+		new EditUserDialog(userID, (page == 1), new EditUserDialog.Callback() {
 			@Override
 			public void success()
 			{
-				// TODO Auto-generated method stub
-				
+				// Redo search now that we've updated.
+				doSearch();
 			}
 			
 			@Override
 			public void failure()
 			{
 				// TODO Auto-generated method stub
-				
 			}
 		});
 	}

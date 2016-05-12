@@ -2,16 +2,12 @@
  * 
  *		CareDemo Copyright 2016 William Edward Woody, all rights reserved.
  */
-package com.chaosinmotion.caredemo.client.dialogs;
+package com.chaosinmotion.caredemo.client.dialogs.edit;
 
-import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
 import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
-import com.chaosinmotion.caredemo.shared.Errors;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -27,15 +23,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author woody
  *
  */
-public class AddressDialog extends DialogBox
+public class EditAddressDialog extends DialogBox
 {
 	public interface Callback
 	{
-		void success();
+		void success(Address addr);
 		void failure();
 	}
 		
-	private JSONObject addr;
+	private Address addrData;
 	
 	private Callback callback;
 	private DialogWidget table;
@@ -47,12 +43,12 @@ public class AddressDialog extends DialogBox
 	private TextBox state;
 	private TextBox postal;
 	
-	public AddressDialog(JSONObject a, Callback cb)
+	public EditAddressDialog(Address a, Callback cb)
 	{
 		super(false,true);
 		
 		callback = cb;
-		addr = a;
+		addrData = a;
 		
 		setStyleName("messageBox");
 		setGlassEnabled(true);
@@ -82,12 +78,12 @@ public class AddressDialog extends DialogBox
 		 */
 		
 		if (a != null) {
-			name.setText(a.get("name").isString().stringValue());
-			addr1.setText(a.get("addr1").isString().stringValue());
-			addr2.setText(a.get("addr2").isString().stringValue());
-			city.setText(a.get("city").isString().stringValue());
-			state.setText(a.get("state").isString().stringValue());
-			postal.setText(a.get("postal").isString().stringValue());
+			name.setText(a.name);
+			addr1.setText(a.addr1);
+			addr2.setText(a.addr2);
+			city.setText(a.city);
+			state.setText(a.state);
+			postal.setText(a.postal);
 		}
 
 		/*
@@ -117,6 +113,7 @@ public class AddressDialog extends DialogBox
 			public void onClick(ClickEvent event)
 			{
 				doDone();
+				hide();
 			}
 		});
 		hpanel.add(saveButton);
@@ -147,38 +144,19 @@ public class AddressDialog extends DialogBox
 	 */
 	private void doDone()
 	{
-		JSONObject req = new JSONObject();
-		if (addr != null) {
-			req.put("cmd", new JSONString("profile/updateAddress"));
-			req.put("index", addr.get("index"));
+		if (addrData == null) {
+			addrData = new Address();
+			addrData.addrID = 0;
 		} else {
-			req.put("cmd", new JSONString("profile/addAddress"));
+			addrData.edit = true;
 		}
-		// Run login process
-		req.put("name", new JSONString(name.getText()));
-		req.put("addr1", new JSONString(addr1.getText()));
-		req.put("addr2", new JSONString(addr2.getText()));
-		req.put("city", new JSONString(city.getText()));
-		req.put("state", new JSONString(state.getText()));
-		req.put("postal", new JSONString(postal.getText()));
-
-		Network.get().request(req, new Network.ResultCallback() {
-			@Override
-			public void response(JSONObject result)
-			{
-				callback.success();
-				hide();
-			}
-			
-			@Override
-			public void error(int serverError)
-			{
-				if (serverError == Errors.ACCESSVIOLATION) {
-					new MessageBox("Error","Access violation.");
-				} else {
-					new MessageBox("Error","Network problem.");
-				}
-			}
-		});
+		addrData.name = name.getText();
+		addrData.addr1 = addr1.getText();
+		addrData.addr2 = addr2.getText();
+		addrData.city = city.getText();
+		addrData.state = state.getText();
+		addrData.postal = postal.getText();
+		
+		callback.success(addrData);
 	}
 }

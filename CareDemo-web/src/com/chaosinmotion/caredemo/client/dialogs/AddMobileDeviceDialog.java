@@ -6,13 +6,13 @@ package com.chaosinmotion.caredemo.client.dialogs;
 
 import com.chaosinmotion.caredemo.client.network.Network;
 import com.chaosinmotion.caredemo.client.widgets.BarButton;
+import com.chaosinmotion.caredemo.client.widgets.DialogWidget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -35,7 +35,7 @@ public class AddMobileDeviceDialog extends DialogBox
 	}
 		
 	private Callback callback;
-	private FlexTable table;
+	private DialogWidget table;
 	private BarButton doneButton;
 	
 	private TextBox code;
@@ -53,7 +53,7 @@ public class AddMobileDeviceDialog extends DialogBox
 		VerticalPanel vpanel = new VerticalPanel();
 		vpanel.setWidth("400px");
 
-		table = new FlexTable();
+		table = new DialogWidget();
 		table.setWidth("100%");
 		
 		vpanel.add(table);
@@ -61,23 +61,11 @@ public class AddMobileDeviceDialog extends DialogBox
 		/*
 		 * 	Format table
 		 */
-		
-		table.setCellPadding(8);
-		table.setCellPadding(0);
-		table.setBorderWidth(0);
-		table.getColumnFormatter().setWidth(0, "120px");
-		
-		table.setText(0, 0, "Make sure the CareDemo application is running on " + 
-				"your phone. Please enter the 8 character registration code shown there.");
-		table.getFlexCellFormatter().setColSpan(0, 0, 2);
-		table.getCellFormatter().setStyleName(0, 0, "dialogtext");
 
-		table.setText(1, 0, "Code:");
-		table.getCellFormatter().setStyleName(1, 0, "dialoglabel");
-		
-		code = new TextBox();
-		code.setStyleName("dialogtextbox");
-		table.setWidget(1, 1, code);
+		table.addText(0, "Make sure the CareDemo application is running on " + 
+				"your phone. Please enter the 8 character registration code shown there.");
+
+		code = table.addTextBox(1, "Code:");
 
 		/*
 		 *  Add buttons

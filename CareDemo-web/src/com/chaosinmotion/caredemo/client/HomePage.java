@@ -61,22 +61,21 @@ public class HomePage implements EntryPoint
 	{
 		RootPanel panel = RootPanel.get("contentpanel");
 
-		// TODO: Load the contents appropriate for the user.
-		PatientPanel ppanel = new PatientPanel();
-		ppanel.setWidth("100%");
-		panel.add(ppanel);
-		
-//		HeadingElement h = Document.get().createHElement(1);
-//		h.setInnerText("Mobile Devices");
-//		panel.getElement().appendChild(h);
-		ParagraphElement p = Document.get().createPElement();
-		p.setInnerHTML("The following devices have been registered to your " + 
-				"account for providing health care information");
-		panel.getElement().appendChild(p);
-		
-		MobileDevicePanel cpanel = new MobileDevicePanel();
-		cpanel.setWidth("100%");
-		panel.add(cpanel);
+		// Load the contents appropriate for the user.
+		if (userData.canAccess(ACE.Patient)) {
+			PatientPanel ppanel = new PatientPanel();
+			ppanel.setWidth("100%");
+			panel.add(ppanel);
+			
+			ParagraphElement p = Document.get().createPElement();
+			p.setInnerHTML("The following devices have been registered to your " + 
+					"account for providing health care information");
+			panel.getElement().appendChild(p);
+			
+			MobileDevicePanel cpanel = new MobileDevicePanel();
+			cpanel.setWidth("100%");
+			panel.add(cpanel);
+		}
 		
 		if (userData.canAccess(ACE.Administrator)) {
 			AdminCommandPanel acp = new AdminCommandPanel();
@@ -84,9 +83,11 @@ public class HomePage implements EntryPoint
 			panel.add(acp);
 		}
 		
-		HCPCommandPanel hcp = new HCPCommandPanel();
-		hcp.setWidth("100%");
-		panel.add(hcp);
+		if (userData.canAccess(ACE.HealthCareProvider)) {
+			HCPCommandPanel hcp = new HCPCommandPanel();
+			hcp.setWidth("100%");
+			panel.add(hcp);
+		}
 	}
 	
 	/**
