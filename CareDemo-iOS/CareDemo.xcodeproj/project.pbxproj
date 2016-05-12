@@ -1,0 +1,437 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF1389CE1CE4D90F000F8988 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1389CD1CE4D90F000F8988 /* main.m */; };
+		EF1389D11CE4D90F000F8988 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1389D01CE4D90F000F8988 /* AppDelegate.m */; };
+		EF1389D41CE4D90F000F8988 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1389D31CE4D90F000F8988 /* ViewController.m */; };
+		EF1389D71CE4D90F000F8988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF1389D51CE4D90F000F8988 /* Main.storyboard */; };
+		EF1389D91CE4D90F000F8988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF1389D81CE4D90F000F8988 /* Assets.xcassets */; };
+		EF1389DC1CE4D90F000F8988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF1389DA1CE4D90F000F8988 /* LaunchScreen.storyboard */; };
+		EF1389E71CE4D90F000F8988 /* CareDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1389E61CE4D90F000F8988 /* CareDemoTests.m */; };
+		EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */; };
+		EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF1389E31CE4D90F000F8988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF1389C11CE4D90F000F8988 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF1389C81CE4D90F000F8988;
+			remoteInfo = CareDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EF1389C91CE4D90F000F8988 /* CareDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF1389CD1CE4D90F000F8988 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EF1389CF1CE4D90F000F8988 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EF1389D01CE4D90F000F8988 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EF1389D21CE4D90F000F8988 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EF1389D31CE4D90F000F8988 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EF1389D61CE4D90F000F8988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EF1389D81CE4D90F000F8988 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF1389DB1CE4D90F000F8988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EF1389DD1CE4D90F000F8988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF1389E21CE4D90F000F8988 /* CareDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CareDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF1389E61CE4D90F000F8988 /* CareDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareDemoTests.m; sourceTree = "<group>"; };
+		EF1389E81CE4D90F000F8988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCBigInteger.cpp; path = Network/SCBigInteger.cpp; sourceTree = "<group>"; };
+		EF1389F31CE4D99E000F8988 /* SCBigInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCBigInteger.h; path = Network/SCBigInteger.h; sourceTree = "<group>"; };
+		EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCMontMath.cpp; path = Network/SCMontMath.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF1389C61CE4D90F000F8988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF1389DF1CE4D90F000F8988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF1389C01CE4D90F000F8988 = {
+			isa = PBXGroup;
+			children = (
+				EF1389F11CE4D940000F8988 /* Network */,
+				EF1389CB1CE4D90F000F8988 /* CareDemo */,
+				EF1389E51CE4D90F000F8988 /* CareDemoTests */,
+				EF1389CA1CE4D90F000F8988 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF1389CA1CE4D90F000F8988 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF1389C91CE4D90F000F8988 /* CareDemo.app */,
+				EF1389E21CE4D90F000F8988 /* CareDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF1389CB1CE4D90F000F8988 /* CareDemo */ = {
+			isa = PBXGroup;
+			children = (
+				EF1389CF1CE4D90F000F8988 /* AppDelegate.h */,
+				EF1389D01CE4D90F000F8988 /* AppDelegate.m */,
+				EF1389D21CE4D90F000F8988 /* ViewController.h */,
+				EF1389D31CE4D90F000F8988 /* ViewController.m */,
+				EF1389D51CE4D90F000F8988 /* Main.storyboard */,
+				EF1389D81CE4D90F000F8988 /* Assets.xcassets */,
+				EF1389DA1CE4D90F000F8988 /* LaunchScreen.storyboard */,
+				EF1389DD1CE4D90F000F8988 /* Info.plist */,
+				EF1389CC1CE4D90F000F8988 /* Supporting Files */,
+			);
+			path = CareDemo;
+			sourceTree = "<group>";
+		};
+		EF1389CC1CE4D90F000F8988 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF1389CD1CE4D90F000F8988 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF1389E51CE4D90F000F8988 /* CareDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF1389E61CE4D90F000F8988 /* CareDemoTests.m */,
+				EF1389E81CE4D90F000F8988 /* Info.plist */,
+			);
+			path = CareDemoTests;
+			sourceTree = "<group>";
+		};
+		EF1389F11CE4D940000F8988 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */,
+				EF1389F31CE4D99E000F8988 /* SCBigInteger.h */,
+				EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF1389C81CE4D90F000F8988 /* CareDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF1389EB1CE4D90F000F8988 /* Build configuration list for PBXNativeTarget "CareDemo" */;
+			buildPhases = (
+				EF1389C51CE4D90F000F8988 /* Sources */,
+				EF1389C61CE4D90F000F8988 /* Frameworks */,
+				EF1389C71CE4D90F000F8988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CareDemo;
+			productName = CareDemo;
+			productReference = EF1389C91CE4D90F000F8988 /* CareDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF1389E11CE4D90F000F8988 /* CareDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF1389EE1CE4D90F000F8988 /* Build configuration list for PBXNativeTarget "CareDemoTests" */;
+			buildPhases = (
+				EF1389DE1CE4D90F000F8988 /* Sources */,
+				EF1389DF1CE4D90F000F8988 /* Frameworks */,
+				EF1389E01CE4D90F000F8988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF1389E41CE4D90F000F8988 /* PBXTargetDependency */,
+			);
+			name = CareDemoTests;
+			productName = CareDemoTests;
+			productReference = EF1389E21CE4D90F000F8988 /* CareDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF1389C11CE4D90F000F8988 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Glenview Software";
+				TargetAttributes = {
+					EF1389C81CE4D90F000F8988 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					EF1389E11CE4D90F000F8988 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = EF1389C81CE4D90F000F8988;
+					};
+				};
+			};
+			buildConfigurationList = EF1389C41CE4D90F000F8988 /* Build configuration list for PBXProject "CareDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF1389C01CE4D90F000F8988;
+			productRefGroup = EF1389CA1CE4D90F000F8988 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF1389C81CE4D90F000F8988 /* CareDemo */,
+				EF1389E11CE4D90F000F8988 /* CareDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF1389C71CE4D90F000F8988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF1389DC1CE4D90F000F8988 /* LaunchScreen.storyboard in Resources */,
+				EF1389D91CE4D90F000F8988 /* Assets.xcassets in Resources */,
+				EF1389D71CE4D90F000F8988 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF1389E01CE4D90F000F8988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF1389C51CE4D90F000F8988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF1389D41CE4D90F000F8988 /* ViewController.m in Sources */,
+				EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */,
+				EF1389D11CE4D90F000F8988 /* AppDelegate.m in Sources */,
+				EF1389CE1CE4D90F000F8988 /* main.m in Sources */,
+				EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF1389DE1CE4D90F000F8988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF1389E71CE4D90F000F8988 /* CareDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF1389E41CE4D90F000F8988 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF1389C81CE4D90F000F8988 /* CareDemo */;
+			targetProxy = EF1389E31CE4D90F000F8988 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF1389D51CE4D90F000F8988 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF1389D61CE4D90F000F8988 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EF1389DA1CE4D90F000F8988 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF1389DB1CE4D90F000F8988 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF1389E91CE4D90F000F8988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EF1389EA1CE4D90F000F8988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF1389EC1CE4D90F000F8988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CareDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaosinmotion.CareDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EF1389ED1CE4D90F000F8988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CareDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaosinmotion.CareDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EF1389EF1CE4D90F000F8988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CareDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaosinmotion.CareDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CareDemo.app/CareDemo";
+			};
+			name = Debug;
+		};
+		EF1389F01CE4D90F000F8988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CareDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaosinmotion.CareDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CareDemo.app/CareDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF1389C41CE4D90F000F8988 /* Build configuration list for PBXProject "CareDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF1389E91CE4D90F000F8988 /* Debug */,
+				EF1389EA1CE4D90F000F8988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF1389EB1CE4D90F000F8988 /* Build configuration list for PBXNativeTarget "CareDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF1389EC1CE4D90F000F8988 /* Debug */,
+				EF1389ED1CE4D90F000F8988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF1389EE1CE4D90F000F8988 /* Build configuration list for PBXNativeTarget "CareDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF1389EF1CE4D90F000F8988 /* Debug */,
+				EF1389F01CE4D90F000F8988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF1389C11CE4D90F000F8988 /* Project object */;
+}
