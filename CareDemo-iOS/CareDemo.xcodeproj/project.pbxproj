@@ -16,6 +16,8 @@
 		EF1389E71CE4D90F000F8988 /* CareDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1389E61CE4D90F000F8988 /* CareDemoTests.m */; };
 		EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */; };
 		EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */; };
+		EF1389F91CE4DB32000F8988 /* SCBlowfish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F71CE4DB32000F8988 /* SCBlowfish.cpp */; };
+		EF1389FC1CE4DB4C000F8988 /* SCDiffieHellman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,10 @@
 		EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCBigInteger.cpp; path = Network/SCBigInteger.cpp; sourceTree = "<group>"; };
 		EF1389F31CE4D99E000F8988 /* SCBigInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCBigInteger.h; path = Network/SCBigInteger.h; sourceTree = "<group>"; };
 		EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCMontMath.cpp; path = Network/SCMontMath.cpp; sourceTree = "<group>"; };
+		EF1389F71CE4DB32000F8988 /* SCBlowfish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCBlowfish.cpp; path = Network/SCBlowfish.cpp; sourceTree = "<group>"; };
+		EF1389F81CE4DB32000F8988 /* SCBlowfish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCBlowfish.h; path = Network/SCBlowfish.h; sourceTree = "<group>"; };
+		EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCDiffieHellman.cpp; path = Network/SCDiffieHellman.cpp; sourceTree = "<group>"; };
+		EF1389FB1CE4DB4C000F8988 /* SCDiffieHellman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCDiffieHellman.h; path = Network/SCDiffieHellman.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,10 @@
 				EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */,
 				EF1389F31CE4D99E000F8988 /* SCBigInteger.h */,
 				EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */,
+				EF1389F71CE4DB32000F8988 /* SCBlowfish.cpp */,
+				EF1389F81CE4DB32000F8988 /* SCBlowfish.h */,
+				EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */,
+				EF1389FB1CE4DB4C000F8988 /* SCDiffieHellman.h */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -171,6 +181,7 @@
 		EF1389C11CE4D90F000F8988 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = CD;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Glenview Software";
 				TargetAttributes = {
@@ -227,11 +238,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF1389FC1CE4DB4C000F8988 /* SCDiffieHellman.cpp in Sources */,
 				EF1389D41CE4D90F000F8988 /* ViewController.m in Sources */,
 				EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */,
 				EF1389D11CE4D90F000F8988 /* AppDelegate.m in Sources */,
 				EF1389CE1CE4D90F000F8988 /* main.m in Sources */,
 				EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */,
+				EF1389F91CE4DB32000F8988 /* SCBlowfish.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
