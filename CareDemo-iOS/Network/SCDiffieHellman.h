@@ -27,7 +27,6 @@ class SCDiffieHellman
 {
 	public:
 						SCDiffieHellman();
-						~SCDiffieHellman();
 
 		const SCBigInteger	&GetPublicKey() const
 							{
