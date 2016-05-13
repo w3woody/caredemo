@@ -4,6 +4,7 @@
  */
 package com.chaosinmotion.caredemo.client.network;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import com.chaosinmotion.caredemo.client.dialogs.MessageBox;
 import com.chaosinmotion.caredemo.shared.Base64;
@@ -84,9 +85,13 @@ public class Network
 		if (storage != null) {
 			String secret = storage.getItem("secret");
 			if (secret != null) {
-				BigInteger secretInteger = new BigInteger(secret);
-				byte[] secretKey = secretInteger.toByteArray();
-				encryption = new Blowfish(secretKey);
+				try {
+					byte[] secretKey = secret.getBytes("UTF-8");
+					encryption = new Blowfish(secretKey);
+				}
+				catch (UnsupportedEncodingException e) {
+					// Ignore
+				}
 			}
 		}
 	}
@@ -272,14 +277,14 @@ public class Network
 						 * Save the secret key to session storage
 						 */
 						Storage storage = Storage.getSessionStorageIfSupported();
+						String skey = secret.toString();
 						if (storage != null) {
-							storage.setItem("secret", secret.toString());
+							storage.setItem("secret", skey);
 						}
 						
 						/*
 						 * Generate the encryption object
 						 */
-						String skey = secret.toString();
 						byte[] secretKey = skey.getBytes("UTF-8");
 						encryption = new Blowfish(secretKey);
 						

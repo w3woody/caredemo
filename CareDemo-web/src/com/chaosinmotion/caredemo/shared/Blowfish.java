@@ -579,7 +579,11 @@ public class Blowfish implements Serializable
 		}
 		catch (UnsupportedEncodingException e) {
 			// Should never happen
-			return null;
+			return "";
+		}
+		catch (StringIndexOutOfBoundsException e) {
+			// Should never happen
+			return "";
 		}
 	}
 }
