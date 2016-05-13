@@ -73,7 +73,6 @@
 - (void)testConnect:(NSTimer *)timer
 {
 	if (self.inTest) return;
-
 	self.inTest = YES;
 
 	NSDictionary *d = @{ @"cmd": @"mobile/pollConnection",
@@ -103,13 +102,16 @@
 						   @"token": token };
 
 	[[CDNetwork shared] request:req caller:self withCallback:^(CDNetworkResponse *r) {
-		self.inTest = NO;
 		if (r.success) {
+			[self.timer invalidate];
+			self.timer = nil;
+			
 			SCSaveSecureData([token dataUsingEncoding:NSUTF8StringEncoding]);
 			[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATEUSERINFO object:self userInfo:r.data];
 
 			[self.navigationController dismissViewControllerAnimated:YES completion:nil];
 		}
+		self.inTest = NO;
 	}];
 }
 

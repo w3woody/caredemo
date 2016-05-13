@@ -227,17 +227,15 @@ public class Mobile
 		
 		UserRecord u;
 		synchronized(mobileKeys) {
-			if (!mobileKeys.containsKey(key)) {
-				// Key expired.
-				return new ReturnResult(Errors.MOBILEEXPIREDCONNECT,"Expired key");
-			}
-			
-			if (!connectMap.containsKey(key)) {
-				// Key not entered yet.
+			if (connectMap.containsKey(key)) {
+				u = connectMap.get(key);
+			} else {
+				if (!mobileKeys.containsKey(key)) {
+					// Key expired.
+					return new ReturnResult(Errors.MOBILEEXPIREDCONNECT,"Expired key");
+				}
 				return new SimpleReturnResult("connected",false);
 			}
-			
-			u = connectMap.get(key);
 		}
 		
 		/*

@@ -194,12 +194,20 @@
 	NSString *pubKey = [NSString stringWithUTF8String:dh->GetPublicKey().ToString().c_str()];
 	NSDictionary *req = @{ @"pubkey": pubKey };
 
+#ifdef DEBUG
+	NSLog(@"-> Open Secure");
+#endif
+
 	[self sendRequest:req callback:^(int err, NSDictionary *json) {
 		/*
 		 *	Update our encryption state and call the callbacks
 		 */
 
 		if (err == 200) {
+#ifdef DEBUG
+			NSLog(@"<- Successful open secure");
+#endif
+
 			NSString *str = json[@"pubkey"];
 			SCBigInteger server([str UTF8String]);
 			SCBigInteger secret = dh->CalcSharedSecret(server);
@@ -215,7 +223,9 @@
 				cb.callback(YES);
 			}
 		} else {
-			NSLog(@"Unable to handshake");
+#ifdef DEBUG
+			NSLog(@"<- Unable to handshake");
+#endif
 			NSArray *a = self.secureCallback;
 			self.secureCallback = nil;
 			for (CDSecureCallback *cb in a) {
@@ -402,6 +412,10 @@ typedef enum {
 
 - (void)enqueueRequest:(CDNetworkRequest *)request
 {
+#ifdef DEBUG
+	NSLog(@"-> req %@",request.params.description);
+#endif
+
 	/*
 	 *	Encrypt the request and wrap
 	 */
@@ -417,6 +431,10 @@ typedef enum {
 
 		int errcode = [json[@"errcode"] intValue];
 		if ((errcode == ERROR_CMDERROR) || (errcode == ERROR_JSONERROR) || (errcode == ERROR_TOKENEXPIRED)) {
+#ifdef DEBUG
+			NSLog(@"<- encretry");
+#endif
+
 			// We need to renegotiate the connection
 			delete encryption;
 			encryption = NULL;
@@ -454,6 +472,9 @@ typedef enum {
 			resp.data = data[@"data"];
 		}
 
+#ifdef DEBUG
+			NSLog(@"<- reply %@ %@",resp.success ? @"success" : @"error",resp.data.description);
+#endif
 
 		if (resp.isAuthenticationError) {
 			[self.retryQueue addObject:request];

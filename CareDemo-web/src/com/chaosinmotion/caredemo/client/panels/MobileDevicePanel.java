@@ -48,6 +48,7 @@ public class MobileDevicePanel extends ContentPanel
 				for (i = 0; i < len; ++i) {
 					JSONObject device = array.get(i).isObject();
 					table.setText(row, 0, device.get("description").isString().stringValue());
+					table.getCellFormatter().setStyleName(row, 0, "dialogtext");
 					
 					BarButton btn = new BarButton("Delete");
 					table.setWidget(row, 1, btn);
