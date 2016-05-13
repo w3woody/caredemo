@@ -14,19 +14,17 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import com.chaosinmotion.caredemo.server.config.Config;
 
 public class EMailUtil
 {
-	/*
-	 * TODO: Refactor into config properties
-	 */
-    private static final String FROM = "bugs@glenviewsoftware.com";
-    private static final String SMTPHOST = "odin.lunarservers.com";
-    private static final String SMTPPORT = "587";
-    private static final String USERNAME = "woody@chaosinmotion.com";
-    private static final String PASSWORD = "sec3ret";
-    private static final String USESSL = "false";
-    private static final String USEAUTH = "true";
+//    private static final String FROM = "bugs@glenviewsoftware.com";
+//    private static final String SMTPHOST = "odin.lunarservers.com";
+//    private static final String SMTPPORT = "587";
+//    private static final String USERNAME = "woody@chaosinmotion.com";
+//    private static final String PASSWORD = "sec3ret";
+//    private static final String USESSL = "false";
+//    private static final String USEAUTH = "true";
     
     private static class Message
     {
@@ -47,7 +45,10 @@ public class EMailUtil
         @Override
         protected PasswordAuthentication getPasswordAuthentication()
         {
-            return new PasswordAuthentication(USERNAME,PASSWORD);
+            Properties config = Config.get();
+        	String username = config.getProperty("email_username");
+        	String password = config.getProperty("email_password");
+            return new PasswordAuthentication(username,password);
         }
     }
     
@@ -72,16 +73,18 @@ public class EMailUtil
                      */
                     System.out.println("Start");
                     
+                    Properties config = Config.get();
+                    
                     Properties p = new Properties();
-                    p.setProperty("mail.smtp.host", SMTPHOST);
-                    p.setProperty("mail.smtp.port", SMTPPORT);
-                    p.put("mail.smtp.starttls.enable", USESSL);
-                    p.setProperty("mail.smtp.auth",USEAUTH);
+                    p.setProperty("mail.smtp.host", config.getProperty("email_smtphost"));
+                    p.setProperty("mail.smtp.port", config.getProperty("email_smtpport"));
+                    p.put("mail.smtp.starttls.enable", config.getProperty("email_usessl"));
+                    p.setProperty("mail.smtp.auth",config.getProperty("email_useauth"));
                     Authenticator auth = new SMTPAuthenticator();
                     Session session = Session.getDefaultInstance(p, auth);
                     
                     MimeMessage msg = new MimeMessage(session);
-                    msg.setFrom(new InternetAddress(FROM));
+                    msg.setFrom(new InternetAddress(config.getProperty("email_from")));
                     msg.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(m.to));
                     msg.setSubject(m.subject);
                     msg.setContent(m.body,"text/plain");
