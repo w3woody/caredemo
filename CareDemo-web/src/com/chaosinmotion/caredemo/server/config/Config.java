@@ -102,6 +102,16 @@ public class Config
              */
 
             try {
+                InputStream is = Config.class.getResourceAsStream("database_private.properties");
+                gProperties = new Properties();
+                gProperties.load(is);
+                return gProperties;
+            }
+            catch (Exception ex) {
+            	gProperties = null;
+            }
+            
+            try {
                 InputStream is = Config.class.getResourceAsStream("database.properties");
                 gProperties = new Properties();
                 gProperties.load(is);
