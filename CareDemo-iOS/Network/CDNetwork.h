@@ -24,13 +24,38 @@
 #define ERROR_NOSUCHUSER 				18 
 
 
+@class CDNetworkResponse;
+@class CDNetworkResponse;
+
+/*
+ *	Network delegate
+ */
+
+@protocol CDNetworkDelegate <NSObject>
+@optional
+- (void)startWaitSpinner;
+- (void)stopWaitSpinner;
+- (void)showServerError:(CDNetworkResponse *)response;
+
+@required
+- (NSString *)credentials;
+- (void)requestConnectionDialog:(void (^)(BOOL success))callback;
+@end
+
+/*
+ *	Network interface
+ */
+
 @interface CDNetwork : NSObject
 
 + (CDNetwork *)shared;
 
+@property (assign) id<CDNetworkDelegate> delegate;
+
 - (BOOL)isSecure;
 - (void)openSecure:(void (^)(BOOL success))callback;
 
-- (void)request:(NSDictionary *)reqJSON withCallback:(void (^)(int err, NSDictionary *result))callback;
+- (void)request:(NSDictionary *)reqJSON caller:(id<NSObject>)caller withCallback:(void (^)(CDNetworkResponse *))callback;
+- (void)cancelWithCaller:(id<NSObject>)caller;
 
 @end

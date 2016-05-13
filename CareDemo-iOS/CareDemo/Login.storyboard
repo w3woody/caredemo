@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UB5-iu-t1t">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="RoB-QF-5y6">
+            <objects>
+                <navigationController id="UB5-iu-t1t" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yDH-zb-noc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gsy-4K-8FW" kind="relationship" relationship="rootViewController" id="nSZ-gE-beJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rpt-Jg-TsO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-240" y="549"/>
+        </scene>
+        <!--CareDemo-->
+        <scene sceneID="75U-F1-bxM">
+            <objects>
+                <viewController id="gsy-4K-8FW" customClass="CDLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="38c-Lu-24z"/>
+                        <viewControllerLayoutGuide type="bottom" id="hPP-52-twt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V3r-KU-0bV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aec-T4-Jtj">
+                                <rect key="frame" x="160" y="150" width="280" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="304" placeholderIntrinsicHeight="88" text="To set up your mobile device to use your CareDemo account, please log into the CareDemo web site at" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBA-Tb-NEr">
+                                        <rect key="frame" x="8" y="8" width="264" height="88"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="304" placeholderIntrinsicHeight="21" text="http://127.0.0.1:8888/m.html" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FL8-xO-rN4">
+                                        <rect key="frame" x="8" y="104" width="264" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="304" placeholderIntrinsicHeight="29" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAn-NI-Iqg">
+                                        <rect key="frame" x="-12" y="229" width="304" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="0.30724069476127625" green="0.48444914817810059" blue="0.69645625352859497" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="304" placeholderIntrinsicHeight="88" text="When prompted, enter the code below. (Do not cancel this screen; the application will continue once done.)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eA-AB-gaL">
+                                        <rect key="frame" x="8" y="133" width="264" height="88"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="3eA-AB-gaL" secondAttribute="trailing" constant="8" id="2Ud-R8-8CX"/>
+                                    <constraint firstAttribute="trailing" secondItem="RBA-Tb-NEr" secondAttribute="trailing" constant="8" id="Bm9-pr-3Hb"/>
+                                    <constraint firstItem="RBA-Tb-NEr" firstAttribute="top" secondItem="aec-T4-Jtj" secondAttribute="top" constant="8" id="BuB-f4-HR5"/>
+                                    <constraint firstItem="3eA-AB-gaL" firstAttribute="leading" secondItem="aec-T4-Jtj" secondAttribute="leading" constant="8" id="Eik-ca-e0g"/>
+                                    <constraint firstItem="kAn-NI-Iqg" firstAttribute="top" secondItem="3eA-AB-gaL" secondAttribute="bottom" constant="8" id="I1m-V8-Xhm"/>
+                                    <constraint firstItem="kAn-NI-Iqg" firstAttribute="leading" secondItem="aec-T4-Jtj" secondAttribute="leading" constant="8" id="JzP-L0-EhC"/>
+                                    <constraint firstItem="FL8-xO-rN4" firstAttribute="leading" secondItem="aec-T4-Jtj" secondAttribute="leading" constant="8" id="Omd-hp-e5G"/>
+                                    <constraint firstAttribute="trailing" secondItem="FL8-xO-rN4" secondAttribute="trailing" constant="8" id="SS8-4M-koT"/>
+                                    <constraint firstAttribute="width" constant="280" id="U2s-Pp-Lo5"/>
+                                    <constraint firstAttribute="height" constant="300" id="YNx-ZT-kSA"/>
+                                    <constraint firstItem="3eA-AB-gaL" firstAttribute="top" secondItem="FL8-xO-rN4" secondAttribute="bottom" constant="8" id="gR5-uC-fzA"/>
+                                    <constraint firstItem="RBA-Tb-NEr" firstAttribute="leading" secondItem="aec-T4-Jtj" secondAttribute="leading" constant="8" id="o9W-ZZ-xkh"/>
+                                    <constraint firstItem="FL8-xO-rN4" firstAttribute="top" secondItem="RBA-Tb-NEr" secondAttribute="bottom" constant="8" id="q53-zG-X2K"/>
+                                    <constraint firstAttribute="trailing" secondItem="kAn-NI-Iqg" secondAttribute="trailing" constant="8" id="tpx-vg-8gF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aec-T4-Jtj" firstAttribute="centerX" secondItem="V3r-KU-0bV" secondAttribute="centerX" id="6t2-hy-Jkt"/>
+                            <constraint firstItem="aec-T4-Jtj" firstAttribute="centerY" secondItem="V3r-KU-0bV" secondAttribute="centerY" id="cBB-ar-oBY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="CareDemo" id="QVz-RG-niw"/>
+                    <connections>
+                        <outlet property="promptLabel" destination="kAn-NI-Iqg" id="Nic-lS-xJE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hFE-hC-UBG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="500" y="549"/>
+        </scene>
+    </scenes>
+</document>

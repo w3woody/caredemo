@@ -13,13 +13,18 @@
 		EF1389D71CE4D90F000F8988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF1389D51CE4D90F000F8988 /* Main.storyboard */; };
 		EF1389D91CE4D90F000F8988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF1389D81CE4D90F000F8988 /* Assets.xcassets */; };
 		EF1389DC1CE4D90F000F8988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF1389DA1CE4D90F000F8988 /* LaunchScreen.storyboard */; };
-		EF1389E71CE4D90F000F8988 /* CareDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1389E61CE4D90F000F8988 /* CareDemoTests.m */; };
+		EF1389E71CE4D90F000F8988 /* CareDemoTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF1389E61CE4D90F000F8988 /* CareDemoTests.mm */; };
 		EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */; };
 		EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F41CE4D99E000F8988 /* SCMontMath.cpp */; };
 		EF1389F91CE4DB32000F8988 /* SCBlowfish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389F71CE4DB32000F8988 /* SCBlowfish.cpp */; };
 		EF1389FC1CE4DB4C000F8988 /* SCDiffieHellman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */; };
 		EF1389FF1CE4E154000F8988 /* CDNetwork.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF1389FE1CE4E154000F8988 /* CDNetwork.mm */; };
 		EF138A021CE4E99C000F8988 /* CDNetworkCookies.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A011CE4E99C000F8988 /* CDNetworkCookies.m */; };
+		EF138A051CE606CF000F8988 /* SCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A041CE606CF000F8988 /* SCKeychain.m */; };
+		EF138A091CE60827000F8988 /* CDNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A081CE60827000F8988 /* CDNetworkRequest.m */; };
+		EF138A0C1CE60842000F8988 /* CDNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A0B1CE60842000F8988 /* CDNetworkResponse.m */; };
+		EF138A0E1CE61E93000F8988 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF138A0D1CE61E93000F8988 /* Login.storyboard */; };
+		EF138A121CE62407000F8988 /* CDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A111CE62407000F8988 /* CDLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +49,7 @@
 		EF1389DB1CE4D90F000F8988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF1389DD1CE4D90F000F8988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF1389E21CE4D90F000F8988 /* CareDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CareDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF1389E61CE4D90F000F8988 /* CareDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareDemoTests.m; sourceTree = "<group>"; };
+		EF1389E61CE4D90F000F8988 /* CareDemoTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CareDemoTests.mm; sourceTree = "<group>"; };
 		EF1389E81CE4D90F000F8988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SCBigInteger.cpp; path = Network/SCBigInteger.cpp; sourceTree = "<group>"; };
 		EF1389F31CE4D99E000F8988 /* SCBigInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCBigInteger.h; path = Network/SCBigInteger.h; sourceTree = "<group>"; };
@@ -57,6 +62,16 @@
 		EF1389FE1CE4E154000F8988 /* CDNetwork.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CDNetwork.mm; path = Network/CDNetwork.mm; sourceTree = "<group>"; };
 		EF138A001CE4E99C000F8988 /* CDNetworkCookies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDNetworkCookies.h; path = Network/CDNetworkCookies.h; sourceTree = "<group>"; };
 		EF138A011CE4E99C000F8988 /* CDNetworkCookies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDNetworkCookies.m; path = Network/CDNetworkCookies.m; sourceTree = "<group>"; };
+		EF138A031CE606CF000F8988 /* SCKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCKeychain.h; path = Network/SCKeychain.h; sourceTree = "<group>"; };
+		EF138A041CE606CF000F8988 /* SCKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCKeychain.m; path = Network/SCKeychain.m; sourceTree = "<group>"; };
+		EF138A071CE60827000F8988 /* CDNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDNetworkRequest.h; path = Network/CDNetworkRequest.h; sourceTree = "<group>"; };
+		EF138A081CE60827000F8988 /* CDNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDNetworkRequest.m; path = Network/CDNetworkRequest.m; sourceTree = "<group>"; };
+		EF138A0A1CE60842000F8988 /* CDNetworkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDNetworkResponse.h; path = Network/CDNetworkResponse.h; sourceTree = "<group>"; };
+		EF138A0B1CE60842000F8988 /* CDNetworkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDNetworkResponse.m; path = Network/CDNetworkResponse.m; sourceTree = "<group>"; };
+		EF138A0D1CE61E93000F8988 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		EF138A101CE62407000F8988 /* CDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLoginViewController.h; sourceTree = "<group>"; };
+		EF138A111CE62407000F8988 /* CDLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLoginViewController.m; sourceTree = "<group>"; };
+		EF138A131CE64FAD000F8988 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,15 +114,18 @@
 		EF1389CB1CE4D90F000F8988 /* CareDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EF138A0F1CE623F2000F8988 /* View Controllers */,
 				EF1389CF1CE4D90F000F8988 /* AppDelegate.h */,
 				EF1389D01CE4D90F000F8988 /* AppDelegate.m */,
 				EF1389D21CE4D90F000F8988 /* ViewController.h */,
 				EF1389D31CE4D90F000F8988 /* ViewController.m */,
 				EF1389D51CE4D90F000F8988 /* Main.storyboard */,
-				EF1389D81CE4D90F000F8988 /* Assets.xcassets */,
 				EF1389DA1CE4D90F000F8988 /* LaunchScreen.storyboard */,
+				EF138A0D1CE61E93000F8988 /* Login.storyboard */,
+				EF1389D81CE4D90F000F8988 /* Assets.xcassets */,
 				EF1389DD1CE4D90F000F8988 /* Info.plist */,
 				EF1389CC1CE4D90F000F8988 /* Supporting Files */,
+				EF138A131CE64FAD000F8988 /* Notifications.h */,
 			);
 			path = CareDemo;
 			sourceTree = "<group>";
@@ -123,13 +141,29 @@
 		EF1389E51CE4D90F000F8988 /* CareDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				EF1389E61CE4D90F000F8988 /* CareDemoTests.m */,
+				EF1389E61CE4D90F000F8988 /* CareDemoTests.mm */,
 				EF1389E81CE4D90F000F8988 /* Info.plist */,
 			);
 			path = CareDemoTests;
 			sourceTree = "<group>";
 		};
 		EF1389F11CE4D940000F8988 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EF138A061CE607C9000F8988 /* Utils */,
+				EF1389FD1CE4E154000F8988 /* CDNetwork.h */,
+				EF1389FE1CE4E154000F8988 /* CDNetwork.mm */,
+				EF138A001CE4E99C000F8988 /* CDNetworkCookies.h */,
+				EF138A011CE4E99C000F8988 /* CDNetworkCookies.m */,
+				EF138A071CE60827000F8988 /* CDNetworkRequest.h */,
+				EF138A081CE60827000F8988 /* CDNetworkRequest.m */,
+				EF138A0A1CE60842000F8988 /* CDNetworkResponse.h */,
+				EF138A0B1CE60842000F8988 /* CDNetworkResponse.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		EF138A061CE607C9000F8988 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				EF1389F21CE4D99E000F8988 /* SCBigInteger.cpp */,
@@ -139,12 +173,19 @@
 				EF1389F81CE4DB32000F8988 /* SCBlowfish.h */,
 				EF1389FA1CE4DB4C000F8988 /* SCDiffieHellman.cpp */,
 				EF1389FB1CE4DB4C000F8988 /* SCDiffieHellman.h */,
-				EF1389FD1CE4E154000F8988 /* CDNetwork.h */,
-				EF1389FE1CE4E154000F8988 /* CDNetwork.mm */,
-				EF138A001CE4E99C000F8988 /* CDNetworkCookies.h */,
-				EF138A011CE4E99C000F8988 /* CDNetworkCookies.m */,
+				EF138A031CE606CF000F8988 /* SCKeychain.h */,
+				EF138A041CE606CF000F8988 /* SCKeychain.m */,
 			);
-			name = Network;
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		EF138A0F1CE623F2000F8988 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EF138A101CE62407000F8988 /* CDLoginViewController.h */,
+				EF138A111CE62407000F8988 /* CDLoginViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF138A0E1CE61E93000F8988 /* Login.storyboard in Resources */,
 				EF1389DC1CE4D90F000F8988 /* LaunchScreen.storyboard in Resources */,
 				EF1389D91CE4D90F000F8988 /* Assets.xcassets in Resources */,
 				EF1389D71CE4D90F000F8988 /* Main.storyboard in Resources */,
@@ -249,12 +291,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF1389FC1CE4DB4C000F8988 /* SCDiffieHellman.cpp in Sources */,
+				EF138A091CE60827000F8988 /* CDNetworkRequest.m in Sources */,
 				EF1389D41CE4D90F000F8988 /* ViewController.m in Sources */,
 				EF138A021CE4E99C000F8988 /* CDNetworkCookies.m in Sources */,
 				EF1389F61CE4D99E000F8988 /* SCMontMath.cpp in Sources */,
+				EF138A121CE62407000F8988 /* CDLoginViewController.m in Sources */,
 				EF1389D11CE4D90F000F8988 /* AppDelegate.m in Sources */,
+				EF138A0C1CE60842000F8988 /* CDNetworkResponse.m in Sources */,
 				EF1389CE1CE4D90F000F8988 /* main.m in Sources */,
 				EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */,
+				EF138A051CE606CF000F8988 /* SCKeychain.m in Sources */,
 				EF1389F91CE4DB32000F8988 /* SCBlowfish.cpp in Sources */,
 				EF1389FF1CE4E154000F8988 /* CDNetwork.mm in Sources */,
 			);
@@ -264,7 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF1389E71CE4D90F000F8988 /* CareDemoTests.m in Sources */,
+				EF1389E71CE4D90F000F8988 /* CareDemoTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CareDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chaosinmotion.CareDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -396,6 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CareDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chaosinmotion.CareDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
