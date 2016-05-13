@@ -7,3 +7,4 @@ CareDemo-web/war/profile
 CareDemo-iOS/Build
 CareDemo-iOS/CareDemo.xcodeproj/project.xcworkspace/xcuserdata
 CareDemo-iOS/CareDemo.xcodeproj/xcuserdata
+CareDemo-web/src/com/chaosinmotion/caredemo/server/config/database_private.properties
