@@ -1,3 +1,6 @@
 [submodule "CareDemo-iOS/CareKit"]
 	path = CareDemo-iOS/CareKit
 	url = https://github.com/carekit-apple/carekit.git
+[submodule "CareDemo-iOS/ResearchKit"]
+	path = CareDemo-iOS/ResearchKit
+	url = https://github.com/researchkit/researchkit
