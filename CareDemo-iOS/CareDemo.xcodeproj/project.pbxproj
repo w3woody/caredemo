@@ -23,8 +23,12 @@
 		EF138A051CE606CF000F8988 /* SCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A041CE606CF000F8988 /* SCKeychain.m */; };
 		EF138A091CE60827000F8988 /* CDNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A081CE60827000F8988 /* CDNetworkRequest.m */; };
 		EF138A0C1CE60842000F8988 /* CDNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A0B1CE60842000F8988 /* CDNetworkResponse.m */; };
-		EF138A0E1CE61E93000F8988 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF138A0D1CE61E93000F8988 /* Login.storyboard */; };
 		EF138A121CE62407000F8988 /* CDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A111CE62407000F8988 /* CDLoginViewController.m */; };
+		EF138A211CE6A1AD000F8988 /* CareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF138A1E1CE6A19A000F8988 /* CareKit.framework */; };
+		EF138A221CE6A1AD000F8988 /* CareKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF138A1E1CE6A19A000F8988 /* CareKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EF138A291CE6B466000F8988 /* CDCarePlanStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A281CE6B466000F8988 /* CDCarePlanStoreManager.m */; };
+		EF138A681CEA497C000F8988 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF138A661CEA497C000F8988 /* Settings.storyboard */; };
+		EF138A6B1CEA4993000F8988 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF138A691CEA4993000F8988 /* Login.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +39,42 @@
 			remoteGlobalIDString = EF1389C81CE4D90F000F8988;
 			remoteInfo = CareDemo;
 		};
+		EF138A1D1CE6A19A000F8988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8605A5BA1C4F04EC00DD65FF;
+			remoteInfo = CareKit;
+		};
+		EF138A1F1CE6A19A000F8988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8605A5C41C4F04EC00DD65FF;
+			remoteInfo = CareKitTests;
+		};
+		EF138A231CE6A1AD000F8988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8605A5B91C4F04EC00DD65FF;
+			remoteInfo = CareKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EF138A251CE6A1AD000F8988 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EF138A221CE6A1AD000F8988 /* CareKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EF1389C91CE4D90F000F8988 /* CareDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,10 +107,14 @@
 		EF138A081CE60827000F8988 /* CDNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDNetworkRequest.m; path = Network/CDNetworkRequest.m; sourceTree = "<group>"; };
 		EF138A0A1CE60842000F8988 /* CDNetworkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDNetworkResponse.h; path = Network/CDNetworkResponse.h; sourceTree = "<group>"; };
 		EF138A0B1CE60842000F8988 /* CDNetworkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDNetworkResponse.m; path = Network/CDNetworkResponse.m; sourceTree = "<group>"; };
-		EF138A0D1CE61E93000F8988 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		EF138A101CE62407000F8988 /* CDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLoginViewController.h; sourceTree = "<group>"; };
 		EF138A111CE62407000F8988 /* CDLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLoginViewController.m; sourceTree = "<group>"; };
 		EF138A131CE64FAD000F8988 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
+		EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CareKit.xcodeproj; path = CareKit/CareKit.xcodeproj; sourceTree = "<group>"; };
+		EF138A271CE6B466000F8988 /* CDCarePlanStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCarePlanStoreManager.h; sourceTree = "<group>"; };
+		EF138A281CE6B466000F8988 /* CDCarePlanStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCarePlanStoreManager.m; sourceTree = "<group>"; };
+		EF138A671CEA497C000F8988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		EF138A6A1CEA4993000F8988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF138A211CE6A1AD000F8988 /* CareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +139,7 @@
 		EF1389C01CE4D90F000F8988 = {
 			isa = PBXGroup;
 			children = (
+				EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */,
 				EF1389F11CE4D940000F8988 /* Network */,
 				EF1389CB1CE4D90F000F8988 /* CareDemo */,
 				EF1389E51CE4D90F000F8988 /* CareDemoTests */,
@@ -114,6 +159,7 @@
 		EF1389CB1CE4D90F000F8988 /* CareDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EF138A261CE6B455000F8988 /* Store */,
 				EF138A0F1CE623F2000F8988 /* View Controllers */,
 				EF1389CF1CE4D90F000F8988 /* AppDelegate.h */,
 				EF1389D01CE4D90F000F8988 /* AppDelegate.m */,
@@ -121,7 +167,8 @@
 				EF1389D31CE4D90F000F8988 /* ViewController.m */,
 				EF1389D51CE4D90F000F8988 /* Main.storyboard */,
 				EF1389DA1CE4D90F000F8988 /* LaunchScreen.storyboard */,
-				EF138A0D1CE61E93000F8988 /* Login.storyboard */,
+				EF138A691CEA4993000F8988 /* Login.storyboard */,
+				EF138A661CEA497C000F8988 /* Settings.storyboard */,
 				EF1389D81CE4D90F000F8988 /* Assets.xcassets */,
 				EF1389DD1CE4D90F000F8988 /* Info.plist */,
 				EF1389CC1CE4D90F000F8988 /* Supporting Files */,
@@ -188,6 +235,24 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		EF138A181CE6A19A000F8988 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF138A1E1CE6A19A000F8988 /* CareKit.framework */,
+				EF138A201CE6A19A000F8988 /* CareKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF138A261CE6B455000F8988 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				EF138A271CE6B466000F8988 /* CDCarePlanStoreManager.h */,
+				EF138A281CE6B466000F8988 /* CDCarePlanStoreManager.m */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -198,10 +263,12 @@
 				EF1389C51CE4D90F000F8988 /* Sources */,
 				EF1389C61CE4D90F000F8988 /* Frameworks */,
 				EF1389C71CE4D90F000F8988 /* Resources */,
+				EF138A251CE6A1AD000F8988 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EF138A241CE6A1AD000F8988 /* PBXTargetDependency */,
 			);
 			name = CareDemo;
 			productName = CareDemo;
@@ -256,6 +323,12 @@
 			mainGroup = EF1389C01CE4D90F000F8988;
 			productRefGroup = EF1389CA1CE4D90F000F8988 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EF138A181CE6A19A000F8988 /* Products */;
+					ProjectRef = EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				EF1389C81CE4D90F000F8988 /* CareDemo */,
@@ -264,15 +337,33 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		EF138A1E1CE6A19A000F8988 /* CareKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CareKit.framework;
+			remoteRef = EF138A1D1CE6A19A000F8988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EF138A201CE6A19A000F8988 /* CareKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CareKitTests.xctest;
+			remoteRef = EF138A1F1CE6A19A000F8988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		EF1389C71CE4D90F000F8988 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF138A0E1CE61E93000F8988 /* Login.storyboard in Resources */,
 				EF1389DC1CE4D90F000F8988 /* LaunchScreen.storyboard in Resources */,
+				EF138A6B1CEA4993000F8988 /* Login.storyboard in Resources */,
 				EF1389D91CE4D90F000F8988 /* Assets.xcassets in Resources */,
 				EF1389D71CE4D90F000F8988 /* Main.storyboard in Resources */,
+				EF138A681CEA497C000F8988 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +393,7 @@
 				EF1389F51CE4D99E000F8988 /* SCBigInteger.cpp in Sources */,
 				EF138A051CE606CF000F8988 /* SCKeychain.m in Sources */,
 				EF1389F91CE4DB32000F8988 /* SCBlowfish.cpp in Sources */,
+				EF138A291CE6B466000F8988 /* CDCarePlanStoreManager.m in Sources */,
 				EF1389FF1CE4E154000F8988 /* CDNetwork.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +414,11 @@
 			target = EF1389C81CE4D90F000F8988 /* CareDemo */;
 			targetProxy = EF1389E31CE4D90F000F8988 /* PBXContainerItemProxy */;
 		};
+		EF138A241CE6A1AD000F8988 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CareKit;
+			targetProxy = EF138A231CE6A1AD000F8988 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -339,6 +436,22 @@
 				EF1389DB1CE4D90F000F8988 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EF138A661CEA497C000F8988 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF138A671CEA497C000F8988 /* Base */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
+		EF138A691CEA4993000F8988 /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF138A6A1CEA4993000F8988 /* Base */,
+			);
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

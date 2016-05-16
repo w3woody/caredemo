@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CareKit/CareKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UITabBarController <OCKSymptomTrackerViewControllerDelegate>
 
 
 @end

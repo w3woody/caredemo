@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "070FEAB7AC6107C6D64110B042BE810C209785BD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6BBB14D18404D37303A51A25CEF2D4EDDAFF0564" : 0,
+    "070FEAB7AC6107C6D64110B042BE810C209785BD" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5C1D8289-2762-4053-BC3E-6CD41EA7B5D3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6BBB14D18404D37303A51A25CEF2D4EDDAFF0564" : "caredemo\/CareDemo-iOS\/CareKit\/",
+    "070FEAB7AC6107C6D64110B042BE810C209785BD" : "caredemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CareDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CareDemo-iOS\/CareDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/glenview.git.beanstalkapp.com\/caredemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "070FEAB7AC6107C6D64110B042BE810C209785BD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/carekit-apple\/carekit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6BBB14D18404D37303A51A25CEF2D4EDDAFF0564"
+    }
+  ]
+}
