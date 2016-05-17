@@ -4,11 +4,13 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9CF6181E3789E3853840089C16D4B9FDDB9B31E2" : 0,
     "6BBB14D18404D37303A51A25CEF2D4EDDAFF0564" : 0,
     "070FEAB7AC6107C6D64110B042BE810C209785BD" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5C1D8289-2762-4053-BC3E-6CD41EA7B5D3",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9CF6181E3789E3853840089C16D4B9FDDB9B31E2" : "caredemo\/CareDemo-iOS\/ResearchKit\/",
     "6BBB14D18404D37303A51A25CEF2D4EDDAFF0564" : "caredemo\/CareDemo-iOS\/CareKit\/",
     "070FEAB7AC6107C6D64110B042BE810C209785BD" : "caredemo\/"
   },
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/carekit-apple\/carekit.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6BBB14D18404D37303A51A25CEF2D4EDDAFF0564"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/researchkit\/researchkit",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9CF6181E3789E3853840089C16D4B9FDDB9B31E2"
     }
   ]
 }

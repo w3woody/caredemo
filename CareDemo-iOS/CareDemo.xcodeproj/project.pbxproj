@@ -29,6 +29,9 @@
 		EF138A291CE6B466000F8988 /* CDCarePlanStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF138A281CE6B466000F8988 /* CDCarePlanStoreManager.m */; };
 		EF138A681CEA497C000F8988 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF138A661CEA497C000F8988 /* Settings.storyboard */; };
 		EF138A6B1CEA4993000F8988 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF138A691CEA4993000F8988 /* Login.storyboard */; };
+		EF318F531CEA615600463E1C /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF318F501CEA612900463E1C /* ResearchKit.framework */; };
+		EF318F541CEA615600463E1C /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF318F501CEA612900463E1C /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EF3DB39E1CEB5C410066024A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF3DB39D1CEB5C410066024A /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,27 @@
 			remoteGlobalIDString = 8605A5B91C4F04EC00DD65FF;
 			remoteInfo = CareKit;
 		};
+		EF318F4F1CEA612900463E1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF318F471CEA612800463E1C /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
+		EF318F511CEA612900463E1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF318F471CEA612800463E1C /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
+		EF318F551CEA615600463E1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF318F471CEA612800463E1C /* ResearchKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B183A4731A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +93,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				EF318F541CEA615600463E1C /* ResearchKit.framework in Embed Frameworks */,
 				EF138A221CE6A1AD000F8988 /* CareKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -115,6 +140,9 @@
 		EF138A281CE6B466000F8988 /* CDCarePlanStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCarePlanStoreManager.m; sourceTree = "<group>"; };
 		EF138A671CEA497C000F8988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		EF138A6A1CEA4993000F8988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		EF318F471CEA612800463E1C /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		EF3DB39C1CEB5C400066024A /* CareDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CareDemo.entitlements; sourceTree = "<group>"; };
+		EF3DB39D1CEB5C410066024A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +150,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF3DB39E1CEB5C410066024A /* HealthKit.framework in Frameworks */,
+				EF318F531CEA615600463E1C /* ResearchKit.framework in Frameworks */,
 				EF138A211CE6A1AD000F8988 /* CareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +169,8 @@
 		EF1389C01CE4D90F000F8988 = {
 			isa = PBXGroup;
 			children = (
+				EF3DB39D1CEB5C410066024A /* HealthKit.framework */,
+				EF318F471CEA612800463E1C /* ResearchKit.xcodeproj */,
 				EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */,
 				EF1389F11CE4D940000F8988 /* Network */,
 				EF1389CB1CE4D90F000F8988 /* CareDemo */,
@@ -159,6 +191,7 @@
 		EF1389CB1CE4D90F000F8988 /* CareDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EF3DB39C1CEB5C400066024A /* CareDemo.entitlements */,
 				EF138A261CE6B455000F8988 /* Store */,
 				EF138A0F1CE623F2000F8988 /* View Controllers */,
 				EF1389CF1CE4D90F000F8988 /* AppDelegate.h */,
@@ -253,6 +286,15 @@
 			name = Store;
 			sourceTree = "<group>";
 		};
+		EF318F481CEA612800463E1C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF318F501CEA612900463E1C /* ResearchKit.framework */,
+				EF318F521CEA612900463E1C /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,6 +311,7 @@
 			);
 			dependencies = (
 				EF138A241CE6A1AD000F8988 /* PBXTargetDependency */,
+				EF318F561CEA615600463E1C /* PBXTargetDependency */,
 			);
 			name = CareDemo;
 			productName = CareDemo;
@@ -305,6 +348,12 @@
 				TargetAttributes = {
 					EF1389C81CE4D90F000F8988 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = MUUNEV88XL;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					EF1389E11CE4D90F000F8988 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -328,6 +377,10 @@
 					ProductGroup = EF138A181CE6A19A000F8988 /* Products */;
 					ProjectRef = EF138A171CE6A19A000F8988 /* CareKit.xcodeproj */;
 				},
+				{
+					ProductGroup = EF318F481CEA612800463E1C /* Products */;
+					ProjectRef = EF318F471CEA612800463E1C /* ResearchKit.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -350,6 +403,20 @@
 			fileType = wrapper.cfbundle;
 			path = CareKitTests.xctest;
 			remoteRef = EF138A1F1CE6A19A000F8988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EF318F501CEA612900463E1C /* ResearchKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ResearchKit.framework;
+			remoteRef = EF318F4F1CEA612900463E1C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EF318F521CEA612900463E1C /* ResearchKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ResearchKitTests.xctest;
+			remoteRef = EF318F511CEA612900463E1C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -418,6 +485,11 @@
 			isa = PBXTargetDependency;
 			name = CareKit;
 			targetProxy = EF138A231CE6A1AD000F8988 /* PBXContainerItemProxy */;
+		};
+		EF318F561CEA615600463E1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ResearchKit;
+			targetProxy = EF318F551CEA615600463E1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -543,6 +615,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CareDemo/CareDemo.entitlements;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CareDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -555,6 +629,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CareDemo/CareDemo.entitlements;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CareDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
