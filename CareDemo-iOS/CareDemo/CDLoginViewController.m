@@ -10,6 +10,7 @@
 #import "CDNetwork.h"
 #import "CDNetworkResponse.h"
 #import "SCKeychain.h"
+#import "CDCarePlanStoreManager.h"
 #import "Notifications.h"
 
 @interface CDLoginViewController ()

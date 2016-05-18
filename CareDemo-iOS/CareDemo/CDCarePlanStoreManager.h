@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CareKit/CareKit.h>
 
+
+#define NOTIFICATION_INSIGHTSUPDATED	@"NOTIFICATION_INSIGHTSUPDATED"
+
 @interface CDCarePlanStoreManager : NSObject <OCKCarePlanStoreDelegate>
 
 + (CDCarePlanStoreManager *)shared;

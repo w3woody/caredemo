@@ -196,8 +196,6 @@
 				EF138A0F1CE623F2000F8988 /* View Controllers */,
 				EF1389CF1CE4D90F000F8988 /* AppDelegate.h */,
 				EF1389D01CE4D90F000F8988 /* AppDelegate.m */,
-				EF1389D21CE4D90F000F8988 /* ViewController.h */,
-				EF1389D31CE4D90F000F8988 /* ViewController.m */,
 				EF1389D51CE4D90F000F8988 /* Main.storyboard */,
 				EF1389DA1CE4D90F000F8988 /* LaunchScreen.storyboard */,
 				EF138A691CEA4993000F8988 /* Login.storyboard */,
@@ -264,6 +262,8 @@
 			children = (
 				EF138A101CE62407000F8988 /* CDLoginViewController.h */,
 				EF138A111CE62407000F8988 /* CDLoginViewController.m */,
+				EF1389D21CE4D90F000F8988 /* ViewController.h */,
+				EF1389D31CE4D90F000F8988 /* ViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

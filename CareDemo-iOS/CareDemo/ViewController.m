@@ -13,6 +13,7 @@
 
 @interface ViewController ()
 @property (strong) OCKSymptomTrackerViewController *symptomTrackerVC;
+@property (strong) OCKInsightsViewController *insightsVC;
 @end
 
 @implementation ViewController
@@ -53,6 +54,7 @@
 	UINavigationController *nic = [[UINavigationController alloc] initWithRootViewController:ic];
 	ic.title = NSLocalizedString(@"Insights", @"Title");
 	ic.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Insights",@"Title") image:[UIImage imageNamed:@"insights"] selectedImage:[UIImage imageNamed:@"insights-filled"]];
+	self.insightsVC = ic;
 
 	OCKConnectViewController *oc = [[OCKConnectViewController alloc] initWithContacts:contacts];
 	UINavigationController *noc = [[UINavigationController alloc] initWithRootViewController:oc];
@@ -63,11 +65,20 @@
 	UINavigationController *vc = sb.instantiateInitialViewController;
 
 	self.viewControllers = @[ ncc, nsc, nic, noc, vc ];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInsights:) name:NOTIFICATION_INSIGHTSUPDATED object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+
+- (void)updateInsights:(NSNotification *)n
+{
+	NSArray<OCKInsightItem *> *insights = [[CDCarePlanStoreManager shared] insights];
+	self.insightsVC.items = insights;
 }
 
 
