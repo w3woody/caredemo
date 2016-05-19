@@ -43,6 +43,10 @@ However, the current code does demonstrate a few interesting features:
 As I continue to tinker with the code base I will add more features and update
 the read-me here.
 
+## More information
+
+More information can be found on my blog at [ChaosInMotion](http://chaosinmotion.com/blog/?cat=25).
+
 # License
     CareDemo: A demo front end/back end using Apple's CareKit and GWT
     
